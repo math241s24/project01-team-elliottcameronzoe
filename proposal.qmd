@@ -8,7 +8,12 @@ editor: visual
 
 Your proposal should include:
 
-* A brief description of your dataset including its provenance, dimensions, etc. (Make sure to load the data and use inline code for some of this information.)
-* The reason why you chose this dataset.
-* The two questions you want to answer.
-  + A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+-   A brief description of your dataset including its provenance, dimensions, etc. (Make sure to load the data and use inline code for some of this information.)
+-   The reason why you chose this dataset.
+-   The two questions you want to answer.
+    -   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+
+As different career paths fall in and out of demand, it is hard to know what is a worth while pursuit in today's job market. We chose this data because we are all interested in careers in data science and we want be knowledgeable about the field as we prepare for graduation. In working with this data we hope to explore (a) the relationships between potential predictor variables and salary, (b) we are curious about the breakdown of specific job titles by location, age, experience-level, work setting, etc., and (c) we are curious about how the supply of data science jobs and equilibrium salaries of data science employees have changed over time.
+
+\
+Recently, the popularity of data science as a discipline (and buzzword) has skyrocketed. With more data scientists, and data science titles, than ever, we expect that the evolution of the salaries over time within the field will be especially compelling. Is there a relationship between the average salary and the number of jobs available ?
