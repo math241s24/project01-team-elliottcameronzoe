@@ -4,16 +4,39 @@ format: html
 editor: visual
 ---
 
-# Proposal
+# Project Proposal
 
-Your proposal should include:
+### Dataset Description
 
--   A brief description of your dataset including its provenance, dimensions, etc. (Make sure to load the data and use inline code for some of this information.)
--   The reason why you chose this dataset.
--   The two questions you want to answer.
-    -   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+-   Our dataset, titled "Jobs and Salaries in Data Science," originates from \[AI Jobs\](<https://ai-jobs.net/salaries/2023/>). It encompasses various attributes crucial for understanding the landscape of data science careers
 
-As different career paths fall in and out of demand, it is hard to know what is a worth while pursuit in today's job market. We chose this data because we are all interested in careers in data science and we want be knowledgeable about the field as we prepare for graduation. In working with this data we hope to explore (a) the relationships between potential predictor variables and salary, (b) we are curious about the breakdown of specific job titles by location, age, experience-level, work setting, etc., and (c) we are curious about how the supply of data science jobs and equilibrium salaries of data science employees have changed over time.
+```{r}
+data_science <- read_csv(file = "data/jobs_in_data.csv", show_col_types = FALSE)
+dim(data_science)
+```
 
-\
-Recently, the popularity of data science as a discipline (and buzzword) has skyrocketed. With more data scientists, and data science titles, than ever, we expect that the evolution of the salaries over time within the field will be especially compelling. Is there a relationship between the average salary and the number of jobs available ?
+-   Our dataset contains 9355 observations with 12 variables.
+
+### Reasons for Dataset Selection
+
+-   As different career paths fall in and out of demand, it is hard to know what is a worth while pursuit in today's job market. We chose this data because we are all interested in careers in data science and we want be knowledgeable about the field as we prepare for graduation.
+
+### Questions
+
+**Q1. Relationship between Predictor Variables and Salary**
+
+-   Variables Involved: \`job_title\`, \`experience_level\`, \`employment_type\`, \`work_setting\`, \`company_size\`
+
+-   Plan: We will analyze how various factors such as job title, experience level, employment type, work setting, and company size influence ones salary levels.
+
+**Q2. Job Title Breakdown by Demographic Factors**
+
+-   Variables Involved:\`job_title\`, \`employee_residence\`, \`age\`, \`experience_level\`, \`work_setting\`
+
+-   Plan: See the differeince in the distribution of specific job titles across different variables like location, age, experience level, and work setting.
+
+**Q3. Evolution of Data Science Jobs and Salaries Over Time**
+
+-   Variables Involved: \`work_year\`, \`job_title\`, \`salary\`
+
+-   Plan: look at how the supply of data science jobs and  salaries have changed over time. Could Also be interesting to see if there's a relationship between the average salary and the number of available jobs.
