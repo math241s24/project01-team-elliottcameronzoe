@@ -4,5 +4,4 @@ format: html
 editor: visual
 ---
 
-This project is developed by **Adrien** as a template for the first mini-project of Math/Stat 241 at Reed College.
-
+This project is developed by Elliott Chang, Cameron Adams, and Zoe Drajem to explore the relationship between multiple variables relating to location, specific job, specific field, etc and salary.
