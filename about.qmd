@@ -4,4 +4,4 @@ format: html
 editor: visual
 ---
 
-This project is developed by Elliott Chang, Cameron Adams, and Zoe Drajem to explore
+This project is developed by Elliott Chang, Cameron Adams, and Zoe Drajem to explore the relationship between multiple variables relating to location, specific job, specific field, etc and salary.
