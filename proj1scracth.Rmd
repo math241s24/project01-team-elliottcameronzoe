@@ -33,7 +33,6 @@ dim(data_science)
 
 
 ```{r}
-
 data_science$job_title <- as.factor(data_science$job_title)
 data_science$experience_level <- as.factor(data_science$experience_level)
 data_science$employment_type <- as.factor(data_science$employment_type)
@@ -173,18 +172,30 @@ summary(model)
 
 
 
-###### Q2
+###### Q2:
 
 ```{r}
+library(maps)
+library(mapdata)
+library(tmap)
+world_map <- map_data("world")
+world_map <- merge(world_map, data_science, by.x = "region", by.y = "company_location", all.x = TRUE)
+
+data("World")
+
+world_map <- left_join(World, data_science, by = c("name" = "company_location"))
+
+tm_shape(world_map) +
+  tm_polygons(col = "salary_in_usd", style = "jenks", palette = "Blues", 
+              title = "Average Salaries by Country", legend.title = "Salary",
+              legend.position = c("right", "bottom"))
 
 # Plotting the breakdown of job titles by employee residence
-ggplot(data = data_science_grouped, aes(x = job_title_grouped, fill = employee_residence)) +
-  geom_bar(position = "dodge", color = "black") +
-  theme_minimal() +
-  labs(title = "Job Title Breakdown by Employee Residence",
-       x = "Job Title",
-       y = "Count") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+ggplot(world_map, aes(x = long, y = lat, group = group, fill = salary_in_usd)) +
+  geom_polygon() +
+  scale_fill_gradient(low = "lightblue", high = "darkblue", na.value = "white") +
+  theme_void() +
+  labs(title = "Average Salaries by Country")
 
 
 # Plotting the breakdown of job titles by experience level

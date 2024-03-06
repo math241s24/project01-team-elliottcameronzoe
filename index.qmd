@@ -5,31 +5,55 @@ editor: visual
 ---
 
 # Write-up
+
 Your write-up should consist of three parts:
 
-## Introduction (1-2 paragraphs): 
+## Introduction (1-2 paragraphs):
 
 Brief introduction to the dataset. You may repeat some of the information about the dataset provided in the introduction to the dataset on the `TidyTuesday` repository, for instance. Imagine that your project is a standalone document and the grader has no prior knowledge of the dataset.
 
-### Question 1: 
-The title should relate to the question you’re answering.
+In order to perform this analysis we must import the following packages
 
-#### Introduction (1-2 paragraphs): 
-Introduction to the question and what parts of the dataset are necessary to answer the question. Also discuss why you’re interested in this question.
+```{r, echo=FALSE}
+libs <- c('tidyverse','knitr','viridis', 'mosaic', 'Lahman', "readr", "dplyr", "tidyr", "ggplot2")
+for(l in libs){
+  if(!require(l,character.only = TRUE, quietly = TRUE)){
+    message( sprintf('Did not have the required package << %s >> installed. Downloading now ... ',l))
+    install.packages(l) 
+  }
+  library(l, character.only = TRUE, quietly = TRUE)
+}
+```
+
+```{r}
+data_science <- read_csv(file = "data/jobs_in_data.csv", show_col_types = FALSE)
+dim(data_science)
+```
+
+### Question 1: How do company location, job title, age, and experience level impact data science salaries over time?
+
+The title should relate to the question you're answering.
+
+#### Introduction (1-2 paragraphs):
+
+Introduction to the question and what parts of the dataset are necessary to answer the question. Also discuss why you're interested in this question.
 
 #### Approach (1-2 paragraphs):
-Describe what types of plots you are going to make to address your question. For each plot, provide a clear explanation as to why this plot (e.g. boxplot, barplot, histogram, etc.) is best for providing the information you are asking about. The two plots should be of different types, and at least one of the two plots needs to use either color mapping or facets.
+
+In order to address this question, we must break it up into three different parts. First, let us analyze the effect of company location on average salary.
 
 #### Analysis (2-3 code blocks, 2 figures, text/code comments as needed):
+
 In this section, provide the code that generates your plots. Use scale functions to provide nice axis labels and guides. You are welcome to use theme functions to customize the appearance of your plot, but you are not required to do so. All plots must be made with ggplot2. Do not use base R or lattice plotting functions.
 
 #### Discussion (1-3 paragraphs):
+
 In the Discussion section, interpret the results of your analysis. Identify any trends revealed (or not revealed) by the plots. Speculate about why the data looks the way it does.
 
-### Question 2: 
-Same structure outlined for Question 1, but for your new question. And the title should relate to the question you’re answering.
+### Question 2: What is the distribution of different data science jobs by company location, age of the individual, experience level, and work setting?
+
+Same structure outlined for Question 1, but for your new question. And the title should relate to the question you're answering.
 
 We encourage you to be concise. A paragraph should typically not be longer than 5 sentences.
 
 You are not required to perform any statistical tests in this project, but you may do so if you find it helpful to answer your question.
-

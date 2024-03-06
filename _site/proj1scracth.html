@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Science Salaries - Lab 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Data Science Salaries</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html">Project</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./proposal.html">Proposal</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./presentation.html">Presentation</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html">About</a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/math241s24/project01-team-elliottcameronzoe"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab 3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>libs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'tidyverse'</span>,<span class="st">'knitr'</span>,<span class="st">'viridis'</span>, <span class="st">'mosaic'</span>, <span class="st">'Lahman'</span>, <span class="st">"readr"</span>, <span class="st">"dplyr"</span>, <span class="st">"tidyr"</span>, <span class="st">"ggplot2"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(l <span class="cf">in</span> libs){</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(l,<span class="at">character.only =</span> <span class="cn">TRUE</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)){</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">message</span>( <span class="fu">sprintf</span>(<span class="st">'Did not have the required package &lt;&lt; %s &gt;&gt; installed. Downloading now ... '</span>,l))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(l) </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(l, <span class="at">character.only =</span> <span class="cn">TRUE</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_science <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"data/jobs_in_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(data_science)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9355   12</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_science<span class="sc">$</span>job_title <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_science<span class="sc">$</span>job_title)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data_science<span class="sc">$</span>experience_level <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_science<span class="sc">$</span>experience_level)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>data_science<span class="sc">$</span>employment_type <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_science<span class="sc">$</span>employment_type)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>data_science<span class="sc">$</span>work_setting <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_science<span class="sc">$</span>work_setting)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>data_science<span class="sc">$</span>company_size <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_science<span class="sc">$</span>company_size)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> job_title <span class="sc">+</span> experience_level <span class="sc">+</span> employment_type <span class="sc">+</span> work_setting <span class="sc">+</span> company_size, <span class="at">data =</span> data_science)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the model</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = salary ~ job_title + experience_level + employment_type + 
+    work_setting + company_size, data = data_science)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-168172  -35547   -4480   29442  346253 
+
+Coefficients:
+                                                  Estimate Std. Error t value
+(Intercept)                                         159452      21343   7.471
+job_titleAI Developer                               -68886      19915  -3.459
+job_titleAI Engineer                                -63921      17779  -3.595
+job_titleAI Programmer                             -118422      28466  -4.160
+job_titleAI Research Engineer                      -130522      30818  -4.235
+job_titleAI Scientist                               -81106      19957  -4.064
+job_titleAnalytics Engineer                         -87465      15750  -5.553
+job_titleAnalytics Engineering Manager              118403      55646   2.128
+job_titleApplied Data Scientist                     -87930      22314  -3.941
+job_titleApplied Machine Learning Engineer          -77593      34465  -2.251
+job_titleApplied Machine Learning Scientist         -92927      21932  -4.237
+job_titleApplied Scientist                          -47880      15752  -3.040
+job_titleAutonomous Vehicle Technician              -67025      41882  -1.600
+job_titleAWS Data Architect                          59246      55533   1.067
+job_titleAzure Data Engineer                        -83581      40825  -2.047
+job_titleBI Analyst                                 -95138      18305  -5.197
+job_titleBI Data Analyst                           -119281      20424  -5.840
+job_titleBI Data Engineer                          -129334      55548  -2.328
+job_titleBI Developer                              -118456      17082  -6.935
+job_titleBig Data Architect                        -100424      40767  -2.463
+job_titleBig Data Engineer                         -102550      24438  -4.196
+job_titleBusiness Data Analyst                     -118087      20026  -5.897
+job_titleBusiness Intelligence Analyst             -109963      17023  -6.460
+job_titleBusiness Intelligence Data Analyst         -80218      40805  -1.966
+job_titleBusiness Intelligence Developer           -133117      20101  -6.622
+job_titleBusiness Intelligence Engineer             -91558      16039  -5.709
+job_titleBusiness Intelligence Manager              -72327      40743  -1.775
+job_titleBusiness Intelligence Specialist           -88074      30786  -2.861
+job_titleCloud Data Architect                        43403      55646   0.780
+job_titleCloud Data Engineer                        -46790      30886  -1.515
+job_titleCloud Database Engineer                    -87534      28383  -3.084
+job_titleCompliance Data Analyst                   -135761      40841  -3.324
+job_titleComputer Vision Engineer                   -52078      18758  -2.776
+job_titleComputer Vision Software Engineer          -86764      28579  -3.036
+job_titleConsultant Data Engineer                   -83447      57237  -1.458
+job_titleData Analyst                              -123459      15466  -7.983
+job_titleData Analytics Consultant                  -66494      41696  -1.595
+job_titleData Analytics Engineer                   -138241      28405  -4.867
+job_titleData Analytics Lead                        -24402      34419  -0.709
+job_titleData Analytics Manager                     -84105      17665  -4.761
+job_titleData Analytics Specialist                 -155688      40711  -3.824
+job_titleData Architect                             -79551      15822  -5.028
+job_titleData Developer                            -118042      26674  -4.425
+job_titleData DevOps Engineer                      -105818      40972  -2.583
+job_titleData Engineer                              -92575      15435  -5.998
+job_titleData Infrastructure Engineer               -34859      21770  -1.601
+job_titleData Integration Engineer                 -126249      40718  -3.101
+job_titleData Integration Specialist                -95304      22990  -4.146
+job_titleData Lead                                  -69556      21013  -3.310
+job_titleData Management Analyst                   -133334      40808  -3.267
+job_titleData Management Specialist                -142755      28374  -5.031
+job_titleData Manager                              -125302      16090  -7.788
+job_titleData Modeler                              -116428      19134  -6.085
+job_titleData Modeller                             -146266      40736  -3.591
+job_titleData Operations Analyst                   -147829      22828  -6.476
+job_titleData Operations Engineer                  -100191      20368  -4.919
+job_titleData Operations Manager                   -108249      40718  -2.659
+job_titleData Operations Specialist                -173652      30784  -5.641
+job_titleData Product Manager                       -98707      24338  -4.056
+job_titleData Product Owner                        -141266      40736  -3.468
+job_titleData Quality Analyst                      -148423      19476  -7.621
+job_titleData Quality Engineer                     -122686      34440  -3.562
+job_titleData Science Consultant                   -124682      17376  -7.175
+job_titleData Science Director                      -72334      30962  -2.336
+job_titleData Science Engineer                      -85243      20985  -4.062
+job_titleData Science Lead                          -55236      19494  -2.833
+job_titleData Science Manager                       -41361      16403  -2.522
+job_titleData Science Practitioner                 -106208      22829  -4.652
+job_titleData Science Tech Lead                     168403      55646   3.026
+job_titleData Scientist                             -81648      15440  -5.288
+job_titleData Scientist Lead                        -68675      40794  -1.683
+job_titleData Specialist                           -124962      17560  -7.116
+job_titleData Strategist                           -145218      19872  -7.308
+job_titleData Strategy Manager                     -105499      30786  -3.427
+job_titleData Visualization Analyst                -130688      40711  -3.210
+job_titleData Visualization Engineer               -127713      30778  -4.150
+job_titleData Visualization Specialist             -128413      30778  -4.172
+job_titleDecision Scientist                         -79202      17658  -4.485
+job_titleDeep Learning Engineer                     -25564      21777  -1.174
+job_titleDeep Learning Researcher                  -127115      55512  -2.290
+job_titleDirector of Data Science                   -39486      18510  -2.133
+job_titleETL Developer                             -115538      19872  -5.814
+job_titleETL Engineer                              -148577      40743  -3.647
+job_titleFinance Data Analyst                       -78060      34756  -2.246
+job_titleFinancial Data Analyst                     -88596      30878  -2.869
+job_titleHead of Data                               -54492      18172  -2.999
+job_titleHead of Data Science                       -76306      22464  -3.397
+job_titleHead of Machine Learning                   -14334      40851  -0.351
+job_titleInsight Analyst                           -172031      24374  -7.058
+job_titleLead Data Analyst                         -104874      34476  -3.042
+job_titleLead Data Engineer                         -68016      26850  -2.533
+job_titleLead Data Scientist                        -93446      24431  -3.825
+job_titleLead Machine Learning Engineer            -144802      34446  -4.204
+job_titleMachine Learning Developer                -105120      24501  -4.290
+job_titleMachine Learning Engineer                  -56780      15486  -3.667
+job_titleMachine Learning Infrastructure Engineer   -85465      18500  -4.620
+job_titleMachine Learning Manager                   -75943      30802  -2.465
+job_titleMachine Learning Modeler                   -77338      40711  -1.900
+job_titleMachine Learning Operations Engineer      -175676      55516  -3.164
+job_titleMachine Learning Research Engineer        -122864      30870  -3.980
+job_titleMachine Learning Researcher                -72914      20151  -3.618
+job_titleMachine Learning Scientist                 -59485      16568  -3.590
+job_titleMachine Learning Software Engineer         -29623      21343  -1.388
+job_titleMachine Learning Specialist               -152327      40743  -3.739
+job_titleManager Data Management                   -110676      55516  -1.994
+job_titleManaging Director Data Science              41677      55618   0.749
+job_titleMarketing Data Analyst                     -84858      40793  -2.080
+job_titleMarketing Data Engineer                    -61682      55674  -1.108
+job_titleML Engineer                                -36567      16247  -2.251
+job_titleMLOps Engineer                             -83701      22278  -3.757
+job_titleNLP Engineer                               -93296      21806  -4.278
+job_titlePower BI Developer                        -138754      55533  -2.499
+job_titlePrincipal Data Analyst                     -85684      40783  -2.101
+job_titlePrincipal Data Engineer                    -84725      34416  -2.462
+job_titlePrincipal Data Scientist                   -47378      22897  -2.069
+job_titlePrincipal Machine Learning Engineer        -44316      34478  -1.285
+job_titleProduct Data Analyst                      -108702      28568  -3.805
+job_titleResearch Analyst                          -134003      17616  -7.607
+job_titleResearch Engineer                          -54289      16027  -3.387
+job_titleResearch Scientist                         -50092      15735  -3.183
+job_titleSales Data Analyst                        -161536      57226  -2.823
+job_titleSoftware Data Engineer                     -77570      34940  -2.220
+job_titleStaff Data Analyst                        -116636      34768  -3.355
+job_titleStaff Data Scientist                       -99095      41383  -2.395
+job_titleStaff Machine Learning Engineer            -30170      55661  -0.542
+experience_levelExecutive                            77562       4474  17.335
+experience_levelMid-level                            17993       2845   6.325
+experience_levelSenior                               54915       2694  20.382
+employment_typeFreelance                            -64661      22183  -2.915
+employment_typeFull-time                             -7771      13987  -0.556
+employment_typePart-time                             -5886      19672  -0.299
+work_settingIn-person                                35518       4465   7.954
+work_settingRemote                                   29079       4470   6.505
+company_sizeM                                         8573       2419   3.544
+company_sizeS                                       -26635       5006  -5.321
+                                                  Pr(&gt;|t|)    
+(Intercept)                                       8.68e-14 ***
+job_titleAI Developer                             0.000545 ***
+job_titleAI Engineer                              0.000326 ***
+job_titleAI Programmer                            3.21e-05 ***
+job_titleAI Research Engineer                     2.31e-05 ***
+job_titleAI Scientist                             4.86e-05 ***
+job_titleAnalytics Engineer                       2.88e-08 ***
+job_titleAnalytics Engineering Manager            0.033383 *  
+job_titleApplied Data Scientist                   8.19e-05 ***
+job_titleApplied Machine Learning Engineer        0.024387 *  
+job_titleApplied Machine Learning Scientist       2.29e-05 ***
+job_titleApplied Scientist                        0.002376 ** 
+job_titleAutonomous Vehicle Technician            0.109558    
+job_titleAWS Data Architect                       0.286057    
+job_titleAzure Data Engineer                      0.040656 *  
+job_titleBI Analyst                               2.07e-07 ***
+job_titleBI Data Analyst                          5.39e-09 ***
+job_titleBI Data Engineer                         0.019916 *  
+job_titleBI Developer                             4.35e-12 ***
+job_titleBig Data Architect                       0.013783 *  
+job_titleBig Data Engineer                        2.74e-05 ***
+job_titleBusiness Data Analyst                    3.84e-09 ***
+job_titleBusiness Intelligence Analyst            1.10e-10 ***
+job_titleBusiness Intelligence Data Analyst       0.049340 *  
+job_titleBusiness Intelligence Developer          3.73e-11 ***
+job_titleBusiness Intelligence Engineer           1.17e-08 ***
+job_titleBusiness Intelligence Manager            0.075901 .  
+job_titleBusiness Intelligence Specialist         0.004235 ** 
+job_titleCloud Data Architect                     0.435426    
+job_titleCloud Data Engineer                      0.129833    
+job_titleCloud Database Engineer                  0.002048 ** 
+job_titleCompliance Data Analyst                  0.000890 ***
+job_titleComputer Vision Engineer                 0.005510 ** 
+job_titleComputer Vision Software Engineer        0.002405 ** 
+job_titleConsultant Data Engineer                 0.144897    
+job_titleData Analyst                             1.60e-15 ***
+job_titleData Analytics Consultant                0.110800    
+job_titleData Analytics Engineer                  1.15e-06 ***
+job_titleData Analytics Lead                      0.478357    
+job_titleData Analytics Manager                   1.96e-06 ***
+job_titleData Analytics Specialist                0.000132 ***
+job_titleData Architect                           5.05e-07 ***
+job_titleData Developer                           9.74e-06 ***
+job_titleData DevOps Engineer                     0.009819 ** 
+job_titleData Engineer                            2.08e-09 ***
+job_titleData Infrastructure Engineer             0.109353    
+job_titleData Integration Engineer                0.001937 ** 
+job_titleData Integration Specialist              3.42e-05 ***
+job_titleData Lead                                0.000936 ***
+job_titleData Management Analyst                  0.001090 ** 
+job_titleData Management Specialist               4.97e-07 ***
+job_titleData Manager                             7.56e-15 ***
+job_titleData Modeler                             1.21e-09 ***
+job_titleData Modeller                            0.000332 ***
+job_titleData Operations Analyst                  9.92e-11 ***
+job_titleData Operations Engineer                 8.84e-07 ***
+job_titleData Operations Manager                  0.007862 ** 
+job_titleData Operations Specialist               1.74e-08 ***
+job_titleData Product Manager                     5.04e-05 ***
+job_titleData Product Owner                       0.000527 ***
+job_titleData Quality Analyst                     2.77e-14 ***
+job_titleData Quality Engineer                    0.000369 ***
+job_titleData Science Consultant                  7.77e-13 ***
+job_titleData Science Director                    0.019499 *  
+job_titleData Science Engineer                    4.90e-05 ***
+job_titleData Science Lead                        0.004615 ** 
+job_titleData Science Manager                     0.011699 *  
+job_titleData Science Practitioner                3.33e-06 ***
+job_titleData Science Tech Lead                   0.002483 ** 
+job_titleData Scientist                           1.26e-07 ***
+job_titleData Scientist Lead                      0.092322 .  
+job_titleData Specialist                          1.19e-12 ***
+job_titleData Strategist                          2.94e-13 ***
+job_titleData Strategy Manager                    0.000613 ***
+job_titleData Visualization Analyst               0.001331 ** 
+job_titleData Visualization Engineer              3.36e-05 ***
+job_titleData Visualization Specialist            3.04e-05 ***
+job_titleDecision Scientist                       7.37e-06 ***
+job_titleDeep Learning Engineer                   0.240482    
+job_titleDeep Learning Researcher                 0.022053 *  
+job_titleDirector of Data Science                 0.032928 *  
+job_titleETL Developer                            6.30e-09 ***
+job_titleETL Engineer                             0.000267 ***
+job_titleFinance Data Analyst                     0.024731 *  
+job_titleFinancial Data Analyst                   0.004125 ** 
+job_titleHead of Data                             0.002719 ** 
+job_titleHead of Data Science                     0.000685 ***
+job_titleHead of Machine Learning                 0.725671    
+job_titleInsight Analyst                          1.81e-12 ***
+job_titleLead Data Analyst                        0.002357 ** 
+job_titleLead Data Engineer                       0.011320 *  
+job_titleLead Data Scientist                      0.000132 ***
+job_titleLead Machine Learning Engineer           2.65e-05 ***
+job_titleMachine Learning Developer               1.80e-05 ***
+job_titleMachine Learning Engineer                0.000247 ***
+job_titleMachine Learning Infrastructure Engineer 3.89e-06 ***
+job_titleMachine Learning Manager                 0.013700 *  
+job_titleMachine Learning Modeler                 0.057509 .  
+job_titleMachine Learning Operations Engineer     0.001559 ** 
+job_titleMachine Learning Research Engineer       6.95e-05 ***
+job_titleMachine Learning Researcher              0.000298 ***
+job_titleMachine Learning Scientist               0.000332 ***
+job_titleMachine Learning Software Engineer       0.165185    
+job_titleMachine Learning Specialist              0.000186 ***
+job_titleManager Data Management                  0.046227 *  
+job_titleManaging Director Data Science           0.453670    
+job_titleMarketing Data Analyst                   0.037533 *  
+job_titleMarketing Data Engineer                  0.267930    
+job_titleML Engineer                              0.024425 *  
+job_titleMLOps Engineer                           0.000173 ***
+job_titleNLP Engineer                             1.90e-05 ***
+job_titlePower BI Developer                       0.012486 *  
+job_titlePrincipal Data Analyst                   0.035671 *  
+job_titlePrincipal Data Engineer                  0.013843 *  
+job_titlePrincipal Data Scientist                 0.038561 *  
+job_titlePrincipal Machine Learning Engineer      0.198696    
+job_titleProduct Data Analyst                     0.000143 ***
+job_titleResearch Analyst                         3.08e-14 ***
+job_titleResearch Engineer                        0.000709 ***
+job_titleResearch Scientist                       0.001460 ** 
+job_titleSales Data Analyst                       0.004771 ** 
+job_titleSoftware Data Engineer                   0.026435 *  
+job_titleStaff Data Analyst                       0.000798 ***
+job_titleStaff Data Scientist                     0.016660 *  
+job_titleStaff Machine Learning Engineer          0.587807    
+experience_levelExecutive                          &lt; 2e-16 ***
+experience_levelMid-level                         2.65e-10 ***
+experience_levelSenior                             &lt; 2e-16 ***
+employment_typeFreelance                          0.003567 ** 
+employment_typeFull-time                          0.578535    
+employment_typePart-time                          0.764772    
+work_settingIn-person                             2.02e-15 ***
+work_settingRemote                                8.18e-11 ***
+company_sizeM                                     0.000396 ***
+company_sizeS                                     1.06e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 53300 on 9220 degrees of freedom
+Multiple R-squared:  0.308, Adjusted R-squared:  0.2979 
+F-statistic: 30.62 on 134 and 9220 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>exp_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(experience_level) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>employment_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(employment_type) <span class="sc">%&gt;%</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>work_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(work_setting) <span class="sc">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>company_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  experience level</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> exp_salary, <span class="fu">aes</span>(<span class="at">x =</span> experience_level, <span class="at">y =</span> avg_salary)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightgreen"</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Experience Level"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Experience Level"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Salary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="proj1scracth_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># employment type </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> employment_salary, <span class="fu">aes</span>(<span class="at">x =</span> employment_type, <span class="at">y =</span> avg_salary)) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightcoral"</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Employment Type"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Employment Type"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Salary"</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="proj1scracth_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  work setting </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> work_salary, <span class="fu">aes</span>(<span class="at">x =</span> work_setting, <span class="at">y =</span> avg_salary, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Remote"</span>, <span class="st">"Hybrid"</span>, <span class="st">"In-Person"</span>))) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightpink"</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Work Setting"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Work Setting"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Salary"</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="proj1scracth_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Remote"</span> <span class="ot">=</span> <span class="st">"Remote"</span>, <span class="st">"Hybrid"</span> <span class="ot">=</span> <span class="st">"Hybrid"</span>, <span class="st">"In-Person"</span> <span class="ot">=</span> <span class="st">"In-Person"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;ggproto object: Class ScaleDiscretePosition, ScaleDiscrete, Scale, gg&gt;
+    aesthetics: x xmin xmax xend
+    axis_order: function
+    break_info: function
+    break_positions: function
+    breaks: waiver
+    call: call
+    clone: function
+    dimension: function
+    drop: TRUE
+    expand: waiver
+    get_breaks: function
+    get_breaks_minor: function
+    get_labels: function
+    get_limits: function
+    guide: waiver
+    is_discrete: function
+    is_empty: function
+    labels: Remote Hybrid In-Person
+    limits: NULL
+    make_sec_title: function
+    make_title: function
+    map: function
+    map_df: function
+    n.breaks.cache: NULL
+    na.translate: TRUE
+    na.value: NA
+    name: waiver
+    palette: function
+    palette.cache: NULL
+    position: bottom
+    range: environment
+    range_c: environment
+    rescale: function
+    reset: function
+    scale_name: position_d
+    train: function
+    train_df: function
+    transform: function
+    transform_df: function
+    super:  &lt;ggproto object: Class ScaleDiscretePosition, ScaleDiscrete, Scale, gg&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># company size </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> company_salary, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(company_size, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"S"</span>, <span class="st">"M"</span>, <span class="st">"L"</span>)), <span class="at">y =</span> avg_salary)) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Company Size"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Company Size"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Salary"</span>) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"S"</span> <span class="ot">=</span> <span class="st">"Small"</span>, <span class="st">"M"</span> <span class="ot">=</span> <span class="st">"Medium"</span>, <span class="st">"L"</span> <span class="ot">=</span> <span class="st">"Large"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="proj1scracth_files/figure-html/unnamed-chunk-5-4.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gets ride of extra titles</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>job_title_counts <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(job_title)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>other_jobs <span class="ot">&lt;-</span> job_title_counts <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&lt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(job_title)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>data_science_grouped <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">job_title_grouped =</span> <span class="fu">if_else</span>(job_title <span class="sc">%in%</span> other_jobs, <span class="st">"Other"</span>, job_title))</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#frequency of titles </span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_science_grouped, <span class="fu">aes</span>(<span class="at">x =</span> job_title_grouped)) <span class="sc">+</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Job Titles (Grouped)"</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Job Title"</span>,</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="proj1scracth_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>avg_salary_by_job <span class="ot">&lt;-</span> data_science_grouped <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(job_title_grouped) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> avg_salary_by_job, <span class="fu">aes</span>(<span class="at">x =</span> job_title_grouped, <span class="at">y =</span> avg_salary)) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Job Title"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Job Title"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Salary"</span>) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="proj1scracth_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data_science<span class="sc">$</span>job_title <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_science<span class="sc">$</span>job_title)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>data_science<span class="sc">$</span>experience_level <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_science<span class="sc">$</span>experience_level)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>data_science<span class="sc">$</span>employment_type <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_science<span class="sc">$</span>employment_type)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>data_science<span class="sc">$</span>work_setting <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_science<span class="sc">$</span>work_setting)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>data_science<span class="sc">$</span>company_size <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_science<span class="sc">$</span>company_size)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span>  experience_level <span class="sc">+</span> employment_type <span class="sc">+</span> work_setting <span class="sc">+</span> company_size, <span class="at">data =</span> data_science)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the model</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = salary ~ experience_level + employment_type + work_setting + 
+    company_size, data = data_science)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-178045  -39821   -6821   34339  330596 
+
+Coefficients:
+                          Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                  78609      14281   5.504 3.80e-08 ***
+experience_levelExecutive    94133       4416  21.315  &lt; 2e-16 ***
+experience_levelMid-level    21998       3013   7.301 3.08e-13 ***
+experience_levelSenior       66910       2820  23.727  &lt; 2e-16 ***
+employment_typeFreelance    -62647      22173  -2.825  0.00473 ** 
+employment_typeFull-time     -8202      13559  -0.605  0.54524    
+employment_typePart-time     -9770      20293  -0.481  0.63020    
+work_settingIn-person        32231       4626   6.967 3.45e-12 ***
+work_settingRemote           23104       4642   4.977 6.58e-07 ***
+company_sizeM                -3727       2332  -1.598  0.11011    
+company_sizeS               -29022       5202  -5.579 2.49e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 58450 on 9344 degrees of freedom
+Multiple R-squared:  0.1567,    Adjusted R-squared:  0.1558 
+F-statistic: 173.6 on 10 and 9344 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<section id="q2" class="level6">
+<h6 class="anchored" data-anchor-id="q2">Q2</h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the breakdown of job titles by employee residence</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_science_grouped, <span class="fu">aes</span>(<span class="at">x =</span> job_title_grouped, <span class="at">fill =</span> employee_residence)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Job Title Breakdown by Employee Residence"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Job Title"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="proj1scracth_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the breakdown of job titles by experience level</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_science_grouped, <span class="fu">aes</span>(<span class="at">x =</span> job_title_grouped, <span class="at">fill =</span> experience_level)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Job Title Breakdown by Experience Level"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Job Title"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="proj1scracth_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the breakdown of job titles by work setting</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_science_grouped, <span class="fu">aes</span>(<span class="at">x =</span> job_title_grouped, <span class="at">fill =</span> work_setting)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Job Title Breakdown by Work Setting"</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Job Title"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="proj1scracth_files/figure-html/unnamed-chunk-9-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="q3" class="level6">
+<h6 class="anchored" data-anchor-id="q3">Q3</h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average salary for each job title and year</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>avg_salary_by_job_year <span class="ot">&lt;-</span> data_science_grouped <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(job_title_grouped, work_year) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the average salary for each job title by year</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> avg_salary_by_job_year, <span class="fu">aes</span>(<span class="at">x =</span> job_title_grouped, <span class="at">y =</span> avg_salary, <span class="at">fill =</span> <span class="fu">factor</span>(work_year))) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Job Title (Factored by Year)"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Job Title"</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Salary"</span>,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Year"</span>) <span class="sc">+</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="proj1scracth_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
