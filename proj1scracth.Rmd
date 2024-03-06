@@ -31,7 +31,6 @@ data_science <- read_csv(file = "data/jobs_in_data.csv", show_col_types = FALSE)
 dim(data_science)
 ```
 
-
 ```{r}
 data_science$job_title <- as.factor(data_science$job_title)
 data_science$experience_level <- as.factor(data_science$experience_level)
@@ -137,6 +136,7 @@ ggplot(data = data_science_grouped, aes(x = job_title_grouped)) +
 
 
 ```
+
 ```{r}
 avg_salary_by_job <- data_science_grouped %>%
   group_by(job_title_grouped) %>%
@@ -151,7 +151,6 @@ ggplot(data = avg_salary_by_job, aes(x = job_title_grouped, y = avg_salary)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
-
 
 ```{r}
 
@@ -170,34 +169,35 @@ summary(model)
 
 ```
 
-
-
 ###### Q2:
 
 ```{r}
-library(maps)
-library(mapdata)
 library(tmap)
-world_map <- map_data("world")
-world_map <- merge(world_map, data_science, by.x = "region", by.y = "company_location", all.x = TRUE)
+
+avg_salary_by_country <- data_science %>%
+  group_by(company_location) %>%
+  summarize(avg_salary_in_usd = mean(salary_in_usd))
+
+avg_salary_by_country <- avg_salary_by_country %>%
+  mutate(company_location = case_when(
+    company_location == "Czech Republic" ~ "Czech Rep.",
+    company_location == "South Korea" ~ "Korea",
+    company_location == "Central African Republic" ~ "Central African Rep.",
+    company_location == "Bosnia and Herzegovina" ~ "Bosnia and Herz.",
+    TRUE ~ company_location
+  ))
+
 
 data("World")
-
-world_map <- left_join(World, data_science, by = c("name" = "company_location"))
+world_map <- merge(World, avg_salary_by_country, by.x = "name", by.y = "company_location", all.x = TRUE)
 
 tm_shape(world_map) +
-  tm_polygons(col = "salary_in_usd", style = "jenks", palette = "Blues", 
-              title = "Average Salaries by Country", legend.title = "Salary",
-              legend.position = c("right", "bottom"))
+  tm_polygons(col = "avg_salary_in_usd", style = "jenks", palette = "Blues",
+              main.title = "Average Salaries of Data Scientists by Country, 2020-2023",
+              title = "Average Salaries by Country (USD), 2020-2023", legend.title = "Salary Range")
+```
 
-# Plotting the breakdown of job titles by employee residence
-ggplot(world_map, aes(x = long, y = lat, group = group, fill = salary_in_usd)) +
-  geom_polygon() +
-  scale_fill_gradient(low = "lightblue", high = "darkblue", na.value = "white") +
-  theme_void() +
-  labs(title = "Average Salaries by Country")
-
-
+```{r}
 # Plotting the breakdown of job titles by experience level
 ggplot(data = data_science_grouped, aes(x = job_title_grouped, fill = experience_level)) +
   geom_bar(position = "dodge", color = "black") +
@@ -217,7 +217,6 @@ ggplot(data = data_science_grouped, aes(x = job_title_grouped, fill = work_setti
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
-
 
 ###### Q3
 
@@ -240,3 +239,9 @@ ggplot(data = avg_salary_by_job_year, aes(x = job_title_grouped, y = avg_salary,
 
 ```
 
+```{r}
+avg_salary_by_employtype <- data_science %>% group_by(employment_type) %>% mutate(mean = mean(salary_in_usd))
+ggplot(avg_salary_by_employtype, aes(x = work_year, y = mean)) + 
+  geom_point() +
+  facet_wrap(~employment_type)
+```

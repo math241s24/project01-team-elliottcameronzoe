@@ -30,17 +30,69 @@ data_science <- read_csv(file = "data/jobs_in_data.csv", show_col_types = FALSE)
 dim(data_science)
 ```
 
-### Question 1: How do company location, job title, age, and experience level impact data science salaries over time?
+```{r echo = F}
+# Data wrangling
+data_science$job_title <- as.factor(data_science$job_title)
+data_science$experience_level <- as.factor(data_science$experience_level)
+data_science$employment_type <- as.factor(data_science$employment_type)
+data_science$work_setting <- as.factor(data_science$work_setting)
+data_science$company_size <- as.factor(data_science$company_size)
+```
 
-The title should relate to the question you're answering.
+### Question 1: How do company location, job title, age, experience level, and year impact data science salaries?
 
 #### Introduction (1-2 paragraphs):
 
-Introduction to the question and what parts of the dataset are necessary to answer the question. Also discuss why you're interested in this question.
+In this section, we aim to answer the question 'How do company location, job title, age, experience level, and year impact data science salaries?' In order to get a complete understanding of data science salaries, it is important to disaggregate this data such that we are able to extract more specific salary trends and statistics. The particular variables we are interested in investigating in relation to salaries are company location, specific job title within the field of data science, field of data science, age, experience level, and time. The relationship between company location and salary is particularly interesting as data science is a relatively new field and requires a lot of technological infrastructure to perform. In addition, in many developing countries, there is likely not as high of a demand for data scientist. As such, we are interested in the differential pay between countries for similar jobs. However, in order to disaggregate the data in service of more specific analysis, its important to look not just at differential pay between countries in the field of data science, but also differential pay between particular positions within data science. In addition, as with most jobs/fields, pay is usually positively correlated with experience level and age. Its correlation with experience level is intuitive, but it is also interesting to investigate whether older people are compensated similarly even if they do not have much experience.
 
 #### Approach (1-2 paragraphs):
 
-In order to address this question, we must break it up into three different parts. First, let us analyze the effect of company location on average salary.
+In order to address this question, we must break it up into three different parts. First, let us analyze the effect of company location on average salary. Below is a map displaying average data science salaries by company location:
+
+```{r, echo=FALSE}
+library(tmap)
+
+avg_salary_by_country <- data_science %>%
+  group_by(company_location) %>%
+  summarize(avg_salary_in_usd = mean(salary_in_usd))
+
+avg_salary_by_country <- avg_salary_by_country %>%
+  mutate(company_location = case_when(
+    company_location == "Czech Republic" ~ "Czech Rep.",
+    company_location == "South Korea" ~ "Korea",
+    company_location == "Central African Republic" ~ "Central African Rep.",
+    company_location == "Bosnia and Herzegovina" ~ "Bosnia and Herz.",
+    TRUE ~ company_location
+  ))
+
+
+data("World")
+world_map <- merge(World, avg_salary_by_country, by.x = "name", by.y = "company_location", all.x = TRUE)
+
+tm_shape(world_map) +
+  tm_polygons(col = "avg_salary_in_usd", style = "jenks", palette = "Blues",
+              main.title = "Average Salaries of Data Scientists by Country, 2020-2023",
+              title = "Average Salaries by Country (USD), 2020-2023", legend.title = "Salary Range")
+```
+
+As displayed in the graph, it appears that data scientists in highly developed nations tend to be compensate more than those in developing countries. Namely, companies in the United States, Canada, Saudi Arabia, Australia, and Japan pay their data scientists the most, on average, based on this data. On the other hand, Indonesia, Malaysia, Egypt, Turkey, Thailand, Pakistan, and Ecuador pay the least on average. It is important to note, however, that many countries, in particular many countries in Africa, South America, and the Eurasian Steppes have no data in this dataset on data scientist salaries. This is likely because most of these countries have very few data scientists, but could also be caused simply by a lack of access to salary data in these countries.
+
+```{r, echo = FALSE}
+# Calculate the average salary for each job title and year
+avg_salary_by_job_year <- data_science_grouped %>%
+  group_by(job_title_grouped, work_year) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+# Plotting the average salary for each job title by year
+ggplot(data = avg_salary_by_job_year, aes(x = job_title_grouped, y = avg_salary, fill = factor(work_year))) +
+  geom_bar(stat = "identity", position = position_dodge(), color = "black") +
+  theme_minimal() +
+  labs(title = "Average Salary by Job Title (Factored by Year)",
+       x = "Job Title",
+       y = "Average Salary",
+       fill = "Year") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
 
 #### Analysis (2-3 code blocks, 2 figures, text/code comments as needed):
 
