@@ -282,23 +282,16 @@ ggplot(data = data_science_grouped, aes(x = job_title_grouped, fill = work_setti
        x = "Job Title",
        y = "Count") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-<<<<<<< HEAD
 ```
 
-
-=======
-
-```
 
 ```{r}
 ggplot(data_science_grouped)
 ```
->>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d
 
 ###### Q3
 
 ```{r}
-
 # Calculate the average salary for each job title and year
 avg_salary_by_job_year <- data_science_grouped %>%
   group_by(job_title_grouped, work_year) %>%
@@ -313,10 +306,6 @@ ggplot(data = avg_salary_by_job_year, aes(x = job_title_grouped, y = avg_salary,
        y = "Average Salary",
        fill = "Year") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-<<<<<<< HEAD
-
-
 ```
 ```{r}
 ggplot(data = avg_salary_by_job_year, aes(x = work_year, y = avg_salary)) +
@@ -329,13 +318,9 @@ ggplot(data = avg_salary_by_job_year, aes(x = work_year, y = avg_salary)) +
 ```
 
 
-=======
-```
-
 ```{r}
 avg_salary_by_employtype <- data_science %>% group_by(employment_type) %>% mutate(mean = mean(salary_in_usd))
 ggplot(avg_salary_by_employtype, aes(x = work_year, y = mean)) + 
   geom_point() +
   facet_wrap(~employment_type)
 ```
->>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d

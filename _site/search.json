@@ -46,7 +46,7 @@
     "href": "presentation.html#introduction",
     "title": "Grab the Cash: Money in Data Science",
     "section": "Introduction",
-    "text": "Introduction\n\n\n\n\ndata_science <- read_csv(file = \"data/jobs_in_data.csv\", show_col_types = FALSE)\ndim(data_science)\n\n[1] 9355   12"
+    "text": "Introduction\n\n\n\n\n\n\nAs different career paths fall in and out of demand, it is hard to know what is a worthwhile pursuit in today’s job market. We are all interested in careers in data science and we want be knowledgeable about the field as we prepare for graduation.\nOur data:\n\nVariables: salary (in local currency), salary (in USD), job title, job category, country of origin, company location (country), work year, work experience, age, work setting, company size, and employment type\nObservations represent individual employees in a given year (2020-2023)\n9355 rows, 12 columns\nSource: https://ai-jobs.net/salaries/2023/\n\nQ1: How do company-related factors (like job title, job category,work setting, and company size) differentially influence the salary of workers in the field of data science?\nQ2: How do personal factors (like location, experience level, and employment type) differentially influence the salary of workers in the field of data science?"
   },
   {
     "objectID": "presentation.html#question-1",
