@@ -236,26 +236,6 @@ combined_plot2
 ```
 
 
-```{r}
-job_title_counts <- data_science %>%
-  count(job_title)
-
-other_jobs <- job_title_counts %>%
-  filter(n < 100) %>%
-  pull(job_title)
-
-data_science_grouped <- data_science %>%
-  mutate(job_title_grouped = if_else(job_title %in% other_jobs, "Other", job_title))
-
-ggplot(data = data_science_grouped, aes(x = job_title_grouped, fill = experience_level)) +
-  geom_bar(position = "dodge", color = "black") +
-  theme_minimal() +
-  labs(title = "Job Title Breakdown by Experience Level",
-       x = "Job Title",
-       y = "Count") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
 We encourage you to be concise. A paragraph should typically not be longer than 5 sentences.
 
 You are not required to perform any statistical tests in this project, but you may do so if you find it helpful to answer your question.

@@ -30,7 +30,7 @@
   {
     "objectID": "presentation.html#rubric",
     "href": "presentation.html#rubric",
-    "title": "Project Presentation",
+    "title": "Grab the Cash: Money in Data Science",
     "section": "Rubric",
     "text": "Rubric\n\nRoughly I recommend 1 slide for introduction, 2 slides for Question 1, ans 2 slides for Question 2.\n\nYou can imagine spending roughly one minute on each slide.\nYou should feel free to have more (or fewer) slides.\n\nYour evaluation will be based on your content, professionalism (including sticking to time), and your performance during the Q&A (question and answer). We don’t care how many slides you use to do this."
   },
@@ -40,5 +40,40 @@
     "title": "About",
     "section": "",
     "text": "This project is developed by Adrien as a template for the first mini-project of Math/Stat 241 at Reed College."
+  },
+  {
+    "objectID": "presentation.html#introduction",
+    "href": "presentation.html#introduction",
+    "title": "Grab the Cash: Money in Data Science",
+    "section": "Introduction",
+    "text": "Introduction\n\n\n\n\ndata_science <- read_csv(file = \"data/jobs_in_data.csv\", show_col_types = FALSE)\ndim(data_science)\n\n[1] 9355   12"
+  },
+  {
+    "objectID": "presentation.html#question-1",
+    "href": "presentation.html#question-1",
+    "title": "Grab the Cash: Money in Data Science",
+    "section": "Question 1",
+    "text": "Question 1"
+  },
+  {
+    "objectID": "presentation.html#question-2",
+    "href": "presentation.html#question-2",
+    "title": "Grab the Cash: Money in Data Science",
+    "section": "Question 2",
+    "text": "Question 2"
+  },
+  {
+    "objectID": "presentation.html#question-1-1",
+    "href": "presentation.html#question-1-1",
+    "title": "Grab the Cash: Money in Data Science",
+    "section": "Question 1",
+    "text": "Question 1"
+  },
+  {
+    "objectID": "presentation.html#question-2-1",
+    "href": "presentation.html#question-2-1",
+    "title": "Grab the Cash: Money in Data Science",
+    "section": "Question 2",
+    "text": "Question 2"
   }
 ]

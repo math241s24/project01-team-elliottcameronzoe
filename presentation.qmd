@@ -1,6 +1,6 @@
 ---
-title: "Project Presentation"
-subtitle: "The data we have chosen"
+title: "Grab the Cash: Money in Data Science"
+subtitle: "Elliott Chang, Cameron Adams, Zoe Drajem"
 format: 
   revealjs
 highlight-style: a11y
@@ -13,14 +13,202 @@ editor_options:
 
 ## Introduction
 
-## 
+```{r, echo=FALSE}
+libs <- c('tidyverse','knitr','viridis', 'mosaic', 'Lahman', "readr", "dplyr", "tidyr", "ggplot2", "tmap", "cowplot")
+for(l in libs){
+  if(!require(l,character.only = TRUE, quietly = TRUE)){
+    message( sprintf('Did not have the required package << %s >> installed. Downloading now ... ',l))
+    install.packages(l) 
+  }
+  library(l, character.only = TRUE, quietly = TRUE)
+}
+```
 
+```{r}
+data_science <- read_csv(file = "data/jobs_in_data.csv", show_col_types = FALSE)
+dim(data_science)
+```
+
+## Question 1
+
+```{r echo = F}
+# Data wrangling
+data_science$job_title <- as.factor(data_science$job_title)
+data_science$experience_level <- as.factor(data_science$experience_level)
+data_science$employment_type <- as.factor(data_science$employment_type)
+data_science$work_setting <- as.factor(data_science$work_setting)
+data_science$company_size <- as.factor(data_science$company_size)
+```
+
+```{r, echo = FALSE}
+job_title_counts <- data_science %>%
+  count(job_title)
+
+other_jobs <- job_title_counts %>%
+  filter(n < 100) %>%
+  pull(job_title)
+
+data_science_grouped <- data_science %>%
+  mutate(job_title_grouped = if_else(job_title %in% other_jobs, "Other", job_title))
+
+# Calculate the average salary for each job title and year
+avg_salary_by_job_year <- data_science_grouped %>%
+  group_by(job_title_grouped, work_year) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+# Plotting the average salary for each job title by year
+plot6 <- ggplot(data = avg_salary_by_job_year, aes(x = job_title_grouped, y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "lightpink") +
+  theme_minimal() +
+  labs(title = "Average Salary by Job Title",
+       x = "Job Title",
+       y = "Average Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+job_category_counts <- data_science %>%
+  count(job_category)
+other_jobs_C <- job_category_counts %>%
+  filter(n < 100) %>%
+  pull(job_category)
+
+data_science_grouped_C <- data_science %>%
+  mutate(job_category_grouped_C = if_else(job_category %in% other_jobs_C, "Other", job_category))
+avg_salary_by_job_C <- data_science_grouped_C %>%
+  group_by(job_category_grouped_C) %>%
+  summarize(avg_salary = mean(salary, na.rm = TRUE))
+
+plot7<- ggplot(data = avg_salary_by_job_C, aes(x = job_category_grouped_C, y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  theme_minimal() +
+  labs(title = "Average Salary by Job Category",
+       x = "Job Category",
+       y = "Average Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+combined_plot3 <- plot_grid(plot6,plot7,ncol = 2)
+combined_plot3
+```
+
+## Question 1
+```{r, echo=FALSE}
+exp_salary <- data_science %>%
+  group_by(experience_level) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+employment_salary <- data_science %>%
+  group_by(employment_type) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+work_salary <- data_science %>%
+  group_by(work_setting) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+company_salary <- data_science %>%
+  group_by(company_size) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+
+# Plot 3: Average Salary by Work Setting
+plot1 <- ggplot(data = work_salary, aes(x = work_setting, y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "lightpink") +
+  theme_minimal() +
+  labs(title = "Average Salary by Work Setting",
+       x = "Work Setting",
+       y = "Avg Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Plot 4: Average Salary by Company Size
+plot2 <- ggplot(data = company_salary, aes(x = factor(company_size, levels = c("S", "M", "L")), y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "lightblue") +
+  theme_minimal() +
+  labs(title = "Average Salary by Company Size",
+       x = "Company Size",
+       y = "Avg Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_discrete(labels = c("S" = "Small", "M" = "Medium", "L" = "Large"))
+
+# Arrange the plots in a grid
+combined_plot <- plot_grid(plot1, plot2, ncol = 2)
+# Print the combined plot
+
+combined_plot
+```
+
+## Question 2
+
+```{r, echo=FALSE}
+avg_salary_by_country <- data_science %>%
+  group_by(company_location) %>%
+  summarize(avg_salary_in_usd = mean(salary_in_usd))
+
+avg_salary_by_country <- avg_salary_by_country %>%
+  mutate(company_location = case_when(
+    company_location == "Czech Republic" ~ "Czech Rep.",
+    company_location == "South Korea" ~ "Korea",
+    company_location == "Central African Republic" ~ "Central African Rep.",
+    company_location == "Bosnia and Herzegovina" ~ "Bosnia and Herz.",
+    TRUE ~ company_location
+  ))
+
+
+data("World")
+world_map <- merge(World, avg_salary_by_country, by.x = "name", by.y = "company_location", all.x = TRUE)
+
+tm_shape(world_map) +
+  tm_polygons(col = "avg_salary_in_usd", style = "jenks", palette = "Blues",
+              main.title = "Average Salaries of Data Scientists by Country, 2020-2023",
+              title = "Average Salaries by Country (USD), 2020-2023", legend.title = "Salary Range")
+```
+
+
+## Question 2
+```{r, echo=FALSE}
+exp_salary <- data_science %>%
+  group_by(experience_level) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+employment_salary <- data_science %>%
+  group_by(employment_type) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+work_salary <- data_science %>%
+  group_by(work_setting) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+company_salary <- data_science %>%
+  group_by(company_size) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+# Plot 1: Average Salary by Experience Level
+plot3 <- ggplot(data = exp_salary, aes(x = experience_level, y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "lightgreen") +
+  theme_minimal() +
+  labs(title = "Average Salary by Experience Level",
+       x = "Experience Level",
+       y = "Avg Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+# Plot 2: Average Salary by Employment Type
+plot4 <- ggplot(data = employment_salary, aes(x = employment_type, y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "lightcoral") +
+  theme_minimal() +
+  labs(title = "Average Salary by Employment Type",
+       x = "Employment Type",
+       y = "Avg Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Arrange the plots in a grid
+combined_plot2 <- plot_grid(plot3, plot4, ncol = 1)
+
+# Print the combined plot
+combined_plot2
+```
 
 
 ## Rubric
 
-* Roughly I recommend 1 slide for introduction, 2 slides for Question 1, ans 2 slides for Question 2. 
-  + You can imagine spending roughly one minute on each slide.
-  + You should feel free to have more (or fewer) slides. 
-  
-* Your evaluation will be based on your content, professionalism (including sticking to time), and your performance during the Q&A (question and answer). We don’t care how many slides you use to do this.
+-   Roughly I recommend 1 slide for introduction, 2 slides for Question 1, ans 2 slides for Question 2.
+    -   You can imagine spending roughly one minute on each slide.
+    -   You should feel free to have more (or fewer) slides.
+-   Your evaluation will be based on your content, professionalism (including sticking to time), and your performance during the Q&A (question and answer). We don't care how many slides you use to do this.
