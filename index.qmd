@@ -39,7 +39,7 @@ data_science$work_setting <- as.factor(data_science$work_setting)
 data_science$company_size <- as.factor(data_science$company_size)
 ```
 
-### Question 1: How do company location, job title, age, experience level, and year impact data science salaries?
+### Question 1: How do company location, job title, and year impact data science salaries?
 
 #### Introduction (1-2 paragraphs):
 
@@ -80,8 +80,11 @@ tm_shape(world_map) +
 As displayed in the graph, it appears that data scientists in highly developed nations tend to be compensate more than those in developing countries. Namely, companies in the United States, Canada, Saudi Arabia, Australia, and Japan pay their data scientists the most, on average, based on this data. On the other hand, Indonesia, Malaysia, Egypt, Turkey, Thailand, Pakistan, and Ecuador pay the least on average. It is important to note, however, that many countries, in particular many countries in Africa, South America, and the Eurasian Steppes have no data in this dataset on data scientist salaries. This is likely because most of these countries have very few data scientists, but could also be caused simply by a lack of access to salary data in these countries.
 
 ```{r, echo = FALSE}
+<<<<<<< HEAD
 
 # gets ride of extra titles
+=======
+>>>>>>> a8b2b17dc9cf153a8becb29518d6cb7f8162b2d0
 job_title_counts <- data_science %>%
   count(job_title)
 
