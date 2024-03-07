@@ -80,11 +80,6 @@ tm_shape(world_map) +
 As displayed in the graph, it appears that data scientists in highly developed nations tend to be compensate more than those in developing countries. Namely, companies in the United States, Canada, Saudi Arabia, Australia, and Japan pay their data scientists the most, on average, based on this data. On the other hand, Indonesia, Malaysia, Egypt, Turkey, Thailand, Pakistan, and Ecuador pay the least on average. It is important to note, however, that many countries, in particular many countries in Africa, South America, and the Eurasian Steppes have no data in this dataset on data scientist salaries. This is likely because most of these countries have very few data scientists, but could also be caused simply by a lack of access to salary data in these countries.
 
 ```{r, echo = FALSE}
-<<<<<<< HEAD
-
-# gets ride of extra titles
-=======
->>>>>>> a8b2b17dc9cf153a8becb29518d6cb7f8162b2d0
 job_title_counts <- data_science %>%
   count(job_title)
 
@@ -180,32 +175,23 @@ combined_plot
 ```
 
 ```{r}
-
-# gets ride of extra titles
 job_category_counts <- data_science %>%
   count(job_category)
-
 other_jobs_C <- job_category_counts %>%
   filter(n < 100) %>%
   pull(job_category)
-
 data_science_grouped_C <- data_science %>%
   mutate(job_category_grouped_C = if_else(job_category %in% other_jobs_C, "Other", job_category))
-
-
 avg_salary_by_job_C <- data_science_grouped_C %>%
   group_by(job_category_grouped_C) %>%
   summarize(avg_salary = mean(salary, na.rm = TRUE))
-
 ggplot(data = avg_salary_by_job_C, aes(x = job_category_grouped_C, y = avg_salary, fill = factor(work_year))) +
   geom_bar(stat = "identity", fill = "skyblue") +
   theme_minimal() +
   labs(title = "Average Salary by Job Category",
        x = "Job Category",
-       y = "Average Salary",
-       fill = year) +
+       y = "Average Salary") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
 ```
 
 #### Discussion (1-3 paragraphs):
