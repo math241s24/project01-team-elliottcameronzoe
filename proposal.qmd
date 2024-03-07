@@ -4,8 +4,6 @@ format: html
 editor: visual
 ---
 
-# Project Proposal
-
 ### Dataset Description
 
 -   Our dataset, titled "Jobs and Salaries in Data Science," originates from \[AI Jobs\](<https://ai-jobs.net/salaries/2023/>). It encompasses various attributes crucial for understanding the landscape of data science careers
