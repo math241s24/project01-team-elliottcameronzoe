@@ -43,11 +43,13 @@ data_science$company_size <- as.factor(data_science$company_size)
 
 #### Introduction (1-2 paragraphs):
 
-In this section, we aim to answer the question 'How do company location, job title, age, experience level, and year impact data science salaries?' In order to get a complete understanding of data science salaries, it is important to disaggregate this data such that we are able to extract more specific salary trends and statistics. The particular variables we are interested in investigating in relation to salaries are company location, specific job title within the field of data science, field of data science, age, experience level, and time. The relationship between company location and salary is particularly interesting as data science is a relatively new field and requires a lot of technological infrastructure to perform. In addition, in many developing countries, there is likely not as high of a demand for data scientist. As such, we are interested in the differential pay between countries for similar jobs. However, in order to disaggregate the data in service of more specific analysis, its important to look not just at differential pay between countries in the field of data science, but also differential pay between particular positions within data science. In addition, as with most jobs/fields, pay is usually positively correlated with experience level and age. Its correlation with experience level is intuitive, but it is also interesting to investigate whether older people are compensated similarly even if they do not have much experience.
+In this section, we aim to answer the question 'How do company location, job title, age, experience level, and year impact data science salaries?' In order to get a complete understanding of data science salaries, it is important to disaggregate this data such that we are able to extract more specific salary trends and statistics. The particular variables we are interested in investigating in relation to salaries are company location, specific job title within the field of data science, field of data science, age, experience level, and time. However, in order to disaggregate the data in service of more specific analysis, its important to look not just at differential pay between countries in the field of data science, but also differential pay between particular positions within data science. In addition, as with most jobs/fields, pay is usually positively correlated with experience level and age. Its correlation with experience level is intuitive, but it is also interesting to investigate whether older people are compensated similarly even if they do not have much experience.
 
 #### Approach (1-2 paragraphs):
 
-In order to address this question, we must break it up into three different parts. First, let us analyze the effect of company location on average salary. Below is a map displaying average data science salaries by company location:
+In order to address this question, we must break it up into three different parts. First, we analyze the effect of company location on average salary. This relationship between company location and salary is particularly interesting as data science is a relatively new field and requires a lot of technological infrastructure to perform. In addition, in many developing countries, there is likely not as high of a demand for data scientist. As such, we are interested in the differential pay between countries for similar jobs. Next, in order to disaggregate the data in service of more specific analysis, its important to look not just at differential pay between countries in the field of data science, but also differential pay between particular positions within data science.
+
+Below is a map displaying average data science salaries by company location
 
 ```{r, echo=FALSE}
 library(tmap)
@@ -78,6 +80,9 @@ tm_shape(world_map) +
 As displayed in the graph, it appears that data scientists in highly developed nations tend to be compensate more than those in developing countries. Namely, companies in the United States, Canada, Saudi Arabia, Australia, and Japan pay their data scientists the most, on average, based on this data. On the other hand, Indonesia, Malaysia, Egypt, Turkey, Thailand, Pakistan, and Ecuador pay the least on average. It is important to note, however, that many countries, in particular many countries in Africa, South America, and the Eurasian Steppes have no data in this dataset on data scientist salaries. This is likely because most of these countries have very few data scientists, but could also be caused simply by a lack of access to salary data in these countries.
 
 ```{r, echo = FALSE}
+data_science_grouped <- data_science %>%
+  mutate(job_title_grouped = if_else(job_title %in% other_jobs, "Other", job_title))
+
 # Calculate the average salary for each job title and year
 avg_salary_by_job_year <- data_science_grouped %>%
   group_by(job_title_grouped, work_year) %>%
@@ -98,13 +103,117 @@ ggplot(data = avg_salary_by_job_year, aes(x = job_title_grouped, y = avg_salary,
 
 In this section, provide the code that generates your plots. Use scale functions to provide nice axis labels and guides. You are welcome to use theme functions to customize the appearance of your plot, but you are not required to do so. All plots must be made with ggplot2. Do not use base R or lattice plotting functions.
 
+```{r}
+library(cowplot)
+
+exp_salary <- data_science %>%
+  group_by(experience_level) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+employment_salary <- data_science %>%
+  group_by(employment_type) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+work_salary <- data_science %>%
+  group_by(work_setting) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+company_salary <- data_science %>%
+  group_by(company_size) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+# Plot 1: Average Salary by Experience Level
+plot1 <- ggplot(data = exp_salary, aes(x = experience_level, y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "lightgreen") +
+  theme_minimal() +
+  labs(title = "Average Salary by Experience Level",
+       x = "Experience Level",
+       y = "Average Salary")
+
+# Plot 2: Average Salary by Employment Type
+plot2 <- ggplot(data = employment_salary, aes(x = employment_type, y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "lightcoral") +
+  theme_minimal() +
+  labs(title = "Average Salary by Employment Type",
+       x = "Employment Type",
+       y = "Average Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Plot 3: Average Salary by Work Setting
+plot3 <- ggplot(data = work_salary, aes(x = work_setting, y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "lightpink") +
+  theme_minimal() +
+  labs(title = "Average Salary by Work Setting",
+       x = "Work Setting",
+       y = "Average Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Plot 4: Average Salary by Company Size
+plot4 <- ggplot(data = company_salary, aes(x = factor(company_size, levels = c("S", "M", "L")), y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "lightblue") +
+  theme_minimal() +
+  labs(title = "Average Salary by Company Size",
+       x = "Company Size",
+       y = "Average Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_discrete(labels = c("S" = "Small", "M" = "Medium", "L" = "Large"))
+
+# Arrange the plots in a grid
+combined_plot <- plot_grid(plot1, plot2, plot3, plot4, ncol = 2)
+
+# Print the combined plot
+combined_plot
+```
+
+```{r}
+salary_breaks <- c(50000, 75000, 100000, 150000, 200000, Inf)
+salary_labels <- c("50k-75k", "75k-100k", "100k-150k", "150k-200k", "200k+")
+
+# Bin the salary data
+job_data <- data_science_grouped
+job_data$salary_bin <- cut(data_science_grouped$salary_in_usd, breaks = salary_breaks, labels = salary_labels)
+
+ggplot(job_data %>% filter(company_location == "United States") %>% na.omit(), aes(x = job_title_grouped)) +
+  geom_bar(binwidth = 10000, fill = "lightblue", color = "black") +
+  facet_wrap(~ salary_bin, ncol = 1) +
+  labs(title = "Distribution of Salary by Job Title",
+       x = "Salary",
+       y = "Frequency") +
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
 #### Discussion (1-3 paragraphs):
 
 In the Discussion section, interpret the results of your analysis. Identify any trends revealed (or not revealed) by the plots. Speculate about why the data looks the way it does.
 
 ### Question 2: What is the distribution of different data science jobs by company location, age of the individual, experience level, and work setting?
 
-Same structure outlined for Question 1, but for your new question. And the title should relate to the question you're answering.
+#### Introduction
+
+In this section we aim to asnwer the question 'What is the distribution of different data science jobs by company location, age of the individual, experience level, and work setting?' This is particularly interesting since, assuming that the dataset is a representative sample of data scientists throughout the world (perhaps a significant assumption), we can extrapolate information about the makeup of data scientists throughout the world.
+
+#### Analysis
+
+```{r}
+job_title_counts <- data_science %>%
+  count(job_title)
+
+other_jobs <- job_title_counts %>%
+  filter(n < 100) %>%
+  pull(job_title)
+
+data_science_grouped <- data_science %>%
+  mutate(job_title_grouped = if_else(job_title %in% other_jobs, "Other", job_title))
+
+ggplot(data = data_science_grouped, aes(x = job_title_grouped, fill = experience_level)) +
+  geom_bar(position = "dodge", color = "black") +
+  theme_minimal() +
+  labs(title = "Job Title Breakdown by Experience Level",
+       x = "Job Title",
+       y = "Count") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
 
 We encourage you to be concise. A paragraph should typically not be longer than 5 sentences.
 

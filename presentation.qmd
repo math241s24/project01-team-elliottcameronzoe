@@ -11,15 +11,11 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Outline
+## Introduction
 
-* Your presentation should generally follow the same structure as your write-up. 
+## 
 
-* Each team will have 5 minutes for their presentation, and each team member must speak (roughly equally) during this time. 
 
-* Your presentation will be created using `Quarto`, which allows you to write slides using the same coding structure you’re used to with `Rmarkdown`. 
-
-* This is a sample Quarto slide template you can edit to your desire to create your presentation. 
 
 ## Rubric
 
