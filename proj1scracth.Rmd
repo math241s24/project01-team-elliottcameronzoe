@@ -31,9 +31,13 @@ data_science <- read_csv(file = "data/jobs_in_data.csv", show_col_types = FALSE)
 dim(data_science)
 ```
 
+<<<<<<< HEAD
 
 ```{r}
 
+=======
+```{r}
+>>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d
 data_science$job_title <- as.factor(data_science$job_title)
 data_science$experience_level <- as.factor(data_science$experience_level)
 data_science$employment_type <- as.factor(data_science$employment_type)
@@ -72,17 +76,29 @@ company_salary <- data_science %>%
 ```
 
 ```{r}
+<<<<<<< HEAD
 
 #  experience level
 ggplot(data = exp_salary, aes(x = experience_level, y = avg_salary)) +
+=======
+library(cowplot)
+
+# Plot 1: Average Salary by Experience Level
+plot1 <- ggplot(data = exp_salary, aes(x = experience_level, y = avg_salary)) +
+>>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d
   geom_bar(stat = "identity", fill = "lightgreen") +
   theme_minimal() +
   labs(title = "Average Salary by Experience Level",
        x = "Experience Level",
        y = "Average Salary")
 
+<<<<<<< HEAD
 # employment type 
 ggplot(data = employment_salary, aes(x = employment_type, y = avg_salary)) +
+=======
+# Plot 2: Average Salary by Employment Type
+plot2 <- ggplot(data = employment_salary, aes(x = employment_type, y = avg_salary)) +
+>>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d
   geom_bar(stat = "identity", fill = "lightcoral") +
   theme_minimal() +
   labs(title = "Average Salary by Employment Type",
@@ -90,19 +106,30 @@ ggplot(data = employment_salary, aes(x = employment_type, y = avg_salary)) +
        y = "Average Salary") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
+<<<<<<< HEAD
 #  work setting 
 ggplot(data = work_salary, aes(x = work_setting, y = avg_salary, levels = c("Remote", "Hybrid", "In-Person"))) +
+=======
+# Plot 3: Average Salary by Work Setting
+plot3 <- ggplot(data = work_salary, aes(x = work_setting, y = avg_salary)) +
+>>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d
   geom_bar(stat = "identity", fill = "lightpink") +
   theme_minimal() +
   labs(title = "Average Salary by Work Setting",
        x = "Work Setting",
        y = "Average Salary") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+<<<<<<< HEAD
   scale_x_discrete(labels = c("Remote" = "Remote", "Hybrid" = "Hybrid", "In-Person" = "In-Person"))
 
 
 # company size 
 ggplot(data = company_salary, aes(x = factor(company_size, levels = c("S", "M", "L")), y = avg_salary)) +
+=======
+
+# Plot 4: Average Salary by Company Size
+plot4 <- ggplot(data = company_salary, aes(x = factor(company_size, levels = c("S", "M", "L")), y = avg_salary)) +
+>>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d
   geom_bar(stat = "identity", fill = "lightblue") +
   theme_minimal() +
   labs(title = "Average Salary by Company Size",
@@ -111,6 +138,14 @@ ggplot(data = company_salary, aes(x = factor(company_size, levels = c("S", "M", 
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_x_discrete(labels = c("S" = "Small", "M" = "Medium", "L" = "Large"))
 
+<<<<<<< HEAD
+=======
+# Arrange the plots in a grid
+combined_plot <- plot_grid(plot1, plot2, plot3, plot4, ncol = 2)
+
+# Print the combined plot
+combined_plot
+>>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d
 
 ```
 
@@ -138,6 +173,10 @@ ggplot(data = data_science_grouped, aes(x = job_title_grouped)) +
 
 
 ```
+<<<<<<< HEAD
+=======
+
+>>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d
 ```{r}
 avg_salary_by_job <- data_science_grouped %>%
   group_by(job_title_grouped) %>%
@@ -153,7 +192,10 @@ ggplot(data = avg_salary_by_job, aes(x = job_title_grouped, y = avg_salary)) +
 
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d
 ```{r}
 
 data_science$job_title <- as.factor(data_science$job_title)
@@ -171,6 +213,7 @@ summary(model)
 
 ```
 
+<<<<<<< HEAD
 
 
 ###### Q2
@@ -191,6 +234,37 @@ ggplot(data = data_science_grouped, aes(x = job_title_grouped, fill = employee_r
 ```{r}
 
 
+=======
+###### Q2:
+
+```{r}
+library(tmap)
+
+avg_salary_by_country <- data_science %>%
+  group_by(company_location) %>%
+  summarize(avg_salary_in_usd = mean(salary_in_usd))
+
+avg_salary_by_country <- avg_salary_by_country %>%
+  mutate(company_location = case_when(
+    company_location == "Czech Republic" ~ "Czech Rep.",
+    company_location == "South Korea" ~ "Korea",
+    company_location == "Central African Republic" ~ "Central African Rep.",
+    company_location == "Bosnia and Herzegovina" ~ "Bosnia and Herz.",
+    TRUE ~ company_location
+  ))
+
+
+data("World")
+world_map <- merge(World, avg_salary_by_country, by.x = "name", by.y = "company_location", all.x = TRUE)
+
+tm_shape(world_map) +
+  tm_polygons(col = "avg_salary_in_usd", style = "jenks", palette = "Blues",
+              main.title = "Average Salaries of Data Scientists by Country, 2020-2023",
+              title = "Average Salaries by Country (USD), 2020-2023", legend.title = "Salary Range")
+```
+
+```{r}
+>>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d
 # Plotting the breakdown of job titles by experience level
 ggplot(data = data_science_grouped, aes(x = job_title_grouped, fill = experience_level)) +
   geom_bar(position = "dodge", color = "black") +
@@ -208,9 +282,18 @@ ggplot(data = data_science_grouped, aes(x = job_title_grouped, fill = work_setti
        x = "Job Title",
        y = "Count") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+<<<<<<< HEAD
 ```
 
 
+=======
+
+```
+
+```{r}
+ggplot(data_science_grouped)
+```
+>>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d
 
 ###### Q3
 
@@ -231,6 +314,7 @@ ggplot(data = avg_salary_by_job_year, aes(x = job_title_grouped, y = avg_salary,
        fill = "Year") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
+<<<<<<< HEAD
 
 
 ```
@@ -245,3 +329,13 @@ ggplot(data = avg_salary_by_job_year, aes(x = work_year, y = avg_salary)) +
 ```
 
 
+=======
+```
+
+```{r}
+avg_salary_by_employtype <- data_science %>% group_by(employment_type) %>% mutate(mean = mean(salary_in_usd))
+ggplot(avg_salary_by_employtype, aes(x = work_year, y = mean)) + 
+  geom_point() +
+  facet_wrap(~employment_type)
+```
+>>>>>>> f6720c8d1b192dfb0dfa5aedb49afb15d655d88d

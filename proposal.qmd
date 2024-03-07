@@ -11,6 +11,7 @@ editor: visual
 -   Our dataset, titled "Jobs and Salaries in Data Science," originates from \[AI Jobs\](<https://ai-jobs.net/salaries/2023/>). It encompasses various attributes crucial for understanding the landscape of data science careers
 
 ```{r}
+library(tidyverse)
 data_science <- read_csv(file = "data/jobs_in_data.csv", show_col_types = FALSE)
 dim(data_science)
 ```
