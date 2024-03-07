@@ -149,7 +149,8 @@ combined_plot
 
 #### Discussion (1-3 paragraphs):
 
-In the Discussion section, interpret the results of your analysis. Identify any trends revealed (or not revealed) by the plots. Speculate about why the data looks the way it does.
+Investigating which aspects of a company impact salary led us to some compelling findings. We found that working in-person and at a medium sized company were both associated with a higher salary on average. Whereas working in a hybrid position and/or working at a small sized company were associated with lower salaries on average. We also noted that job categories and job titles do affect average salary. Positions in Machine Learning and AI along with Data Science Research were associated with the highest salaries on average, while positions under Data Science typically had lower salaries.
+
 
 ### The Effect of Personal Characteristics on Salary
 
@@ -233,5 +234,5 @@ tm_shape(world_map) +
 
 #### Discussion
 
-  As displayed in the map, it appears that data scientists in highly developed nations tend to be compensate more than those in developing countries. Namely, companies in the United States, Canada, Saudi Arabia, Australia, and Japan pay their data scientists the most, on average, based on this data. On the other hand, Indonesia, Malaysia, Egypt, Turkey, Thailand, Pakistan, and Ecuador pay the least on average. It is important to note, however, that many countries, in particular many countries in Africa, South America, and the Eurasian Steppes have no data in this dataset on data scientist salaries. This is likely because most of these countries have very few data scientists, but could also be caused simply by a lack of access to salary data in these countries. In addition, this visualization doesn't take into account cost of living in these different countries.
+  Our investigation was rendered more comprehensive with our subsequent analysis of personal factors which impact salary. Perhaps unsurprisingly, we found that average salary has a steadily increasing relationship with experience level. Entry level employees make under 100k on average, while executives made over 200k. The type of employment data scientists are contracted is also an important determining factor. Full-time workers had an average salary of 150k while freelance workers had an average salary of 50k. Additionally, the spacial analysis of salary by country also revealed that location matters. The United States, Canada, Saudi Arabia, Japan, and Australia had the highest annual salaries on average. Other countries such as Pakistan, Egypt, Indonesia, Turkey, and Ecuador had the lowest average salaries.
   
