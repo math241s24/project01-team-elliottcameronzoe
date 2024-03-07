@@ -4,15 +4,14 @@ format: html
 editor: visual
 ---
 
-# Write-up
+# A Look Into Salaries in Data Science
 
-Your write-up should consist of three parts:
+## Introduction:
 
-## Introduction (1-2 paragraphs):
-
-Brief introduction to the dataset. You may repeat some of the information about the dataset provided in the introduction to the dataset on the `TidyTuesday` repository, for instance. Imagine that your project is a standalone document and the grader has no prior knowledge of the dataset.
-
-In order to perform this analysis we must import the following packages
+As different career paths fall in and out of demand, it is hard to know what is a worth while pursuit in today's job market. We are all interested in careers in data science and we want be knowledgeable about the field as we prepare for graduation. We were especially curious about two things:
+-  What aspects of a company affect average salary?
+-  How does salary change based on personal characteristics?
+To answer these questions we first selected a data set titled "Jobs and Salaries in Data Science," which originated from [AI Jobs](https://ai-jobs.net/salaries/2023/). Each observation represents one person in one year. Our dataset contains 9355 observations with 12 variables. The variables include information on salary, and explanatory variables such as company size, experience level, work setting, employment type, and year. There is also an extensive list of data science job titles.
 
 ```{r, echo=FALSE}
 libs <- c('tidyverse','knitr','viridis', 'mosaic', 'Lahman', "readr", "dplyr", "tidyr", "ggplot2")
@@ -25,9 +24,8 @@ for(l in libs){
 }
 ```
 
-```{r}
+```{r, echo=FALSE}
 data_science <- read_csv(file = "data/jobs_in_data.csv", show_col_types = FALSE)
-dim(data_science)
 ```
 
 ```{r echo = F}
@@ -39,11 +37,12 @@ data_science$work_setting <- as.factor(data_science$work_setting)
 data_science$company_size <- as.factor(data_science$company_size)
 ```
 
-### Question 1: How do company location, job title, and year impact data science salaries?
+### The Effect of Company-Level Demands and Characteristics on Salary
 
-#### Introduction (1-2 paragraphs):
+#### Introduction:
 
-In this section, we aim to answer the question 'How do company location, job title, age, experience level, and year impact data science salaries?' In order to get a complete understanding of data science salaries, it is important to disaggregate this data such that we are able to extract more specific salary trends and statistics. The particular variables we are interested in investigating in relation to salaries are company location, specific job title within the field of data science, field of data science, age, experience level, and time. However, in order to disaggregate the data in service of more specific analysis, its important to look not just at differential pay between countries in the field of data science, but also differential pay between particular positions within data science. In addition, as with most jobs/fields, pay is usually positively correlated with experience level and age. Its correlation with experience level is intuitive, but it is also interesting to investigate whether older people are compensated similarly even if they do not have much experience.
+  In this section, we aim to answer the question 'how do company-related factors (like job title, job category, work setting, and company size) influence the salary of workers in the field of data science?' In order to get a complete understanding of data science salaries, it is important to disaggregate this data such that we are able to extract more specific insights. 
+  We decided looking at average salaries by job title, job category, work setting, and company size provide a useful glimpse into the relative *value* (in a strictly monetary sense) of certain jobs and certain company attributes. First, viewing salary by job title conveys important information about which specific jobs are in high demand (or low supply). Job category is useful in a similar way, as it provides a more zoomed-out view of the data science landscape. Since the COVID pandemic increased the need and acceptability of remote work, we thought it would be appropriate to investigate the differences in salary by work environment. Finally, company size provides a useful understand of how differently sized companies pay their data science employees.
 
 #### Approach (1-2 paragraphs):
 
