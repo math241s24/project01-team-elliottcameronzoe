@@ -51,6 +51,119 @@ In order to address this question, we must break it up into three different part
 
 Below is a map displaying average data science salaries by company location
 
+
+As displayed in the graph, it appears that data scientists in highly developed nations tend to be compensate more than those in developing countries. Namely, companies in the United States, Canada, Saudi Arabia, Australia, and Japan pay their data scientists the most, on average, based on this data. On the other hand, Indonesia, Malaysia, Egypt, Turkey, Thailand, Pakistan, and Ecuador pay the least on average. It is important to note, however, that many countries, in particular many countries in Africa, South America, and the Eurasian Steppes have no data in this dataset on data scientist salaries. This is likely because most of these countries have very few data scientists, but could also be caused simply by a lack of access to salary data in these countries.
+
+
+#### Analysis (2-3 code blocks, 2 figures, text/code comments as needed):
+
+In this section, provide the code that generates your plots. Use scale functions to provide nice axis labels and guides. You are welcome to use theme functions to customize the appearance of your plot, but you are not required to do so. All plots must be made with ggplot2. Do not use base R or lattice plotting functions.
+
+```{r, echo = FALSE}
+job_title_counts <- data_science %>%
+  count(job_title)
+
+other_jobs <- job_title_counts %>%
+  filter(n < 100) %>%
+  pull(job_title)
+
+data_science_grouped <- data_science %>%
+  mutate(job_title_grouped = if_else(job_title %in% other_jobs, "Other", job_title))
+
+# Calculate the average salary for each job title and year
+avg_salary_by_job_year <- data_science_grouped %>%
+  group_by(job_title_grouped, work_year) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+# Plotting the average salary for each job title by year
+ggplot(data = avg_salary_by_job_year, aes(x = job_title_grouped, y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "lightpink") +
+  theme_minimal() +
+  labs(title = "Average Salary by Job Title",
+       x = "Job Title",
+       y = "Average Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+job_category_counts <- data_science %>%
+  count(job_category)
+other_jobs_C <- job_category_counts %>%
+  filter(n < 100) %>%
+  pull(job_category)
+
+data_science_grouped_C <- data_science %>%
+  mutate(job_category_grouped_C = if_else(job_category %in% other_jobs_C, "Other", job_category))
+avg_salary_by_job_C <- data_science_grouped_C %>%
+  group_by(job_category_grouped_C) %>%
+  summarize(avg_salary = mean(salary, na.rm = TRUE))
+
+ggplot(data = avg_salary_by_job_C, aes(x = job_category_grouped_C, y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  theme_minimal() +
+  labs(title = "Average Salary by Job Category",
+       x = "Job Category",
+       y = "Average Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+library(cowplot)
+
+exp_salary <- data_science %>%
+  group_by(experience_level) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+employment_salary <- data_science %>%
+  group_by(employment_type) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+work_salary <- data_science %>%
+  group_by(work_setting) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+company_salary <- data_science %>%
+  group_by(company_size) %>%
+  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
+
+
+# Plot 3: Average Salary by Work Setting
+plot1 <- ggplot(data = work_salary, aes(x = work_setting, y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "lightpink") +
+  theme_minimal() +
+  labs(title = "Average Salary by Work Setting",
+       x = "Work Setting",
+       y = "Avg Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Plot 4: Average Salary by Company Size
+plot2 <- ggplot(data = company_salary, aes(x = factor(company_size, levels = c("S", "M", "L")), y = avg_salary)) +
+  geom_bar(stat = "identity", fill = "lightblue") +
+  theme_minimal() +
+  labs(title = "Average Salary by Company Size",
+       x = "Company Size",
+       y = "Avg Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_discrete(labels = c("S" = "Small", "M" = "Medium", "L" = "Large"))
+
+# Arrange the plots in a grid
+combined_plot <- plot_grid(plot1, plot2, ncol = 1)
+
+# Print the combined plot
+combined_plot
+```
+
+
+#### Discussion (1-3 paragraphs):
+
+In the Discussion section, interpret the results of your analysis. Identify any trends revealed (or not revealed) by the plots. Speculate about why the data looks the way it does.
+
+### Question 2: What is the distribution of different data science jobs by company location, age of the individual, experience level, and work setting?
+
+#### Introduction
+
+In this section we aim to asnwer the question 'What is the distribution of different data science jobs by company location, age of the individual, experience level, and work setting?' This is particularly interesting since, assuming that the dataset is a representative sample of data scientists throughout the world (perhaps a significant assumption), we can extrapolate information about the makeup of data scientists throughout the world.
+
+#### Analysis
+
 ```{r, echo=FALSE}
 library(tmap)
 
@@ -77,39 +190,6 @@ tm_shape(world_map) +
               title = "Average Salaries by Country (USD), 2020-2023", legend.title = "Salary Range")
 ```
 
-As displayed in the graph, it appears that data scientists in highly developed nations tend to be compensate more than those in developing countries. Namely, companies in the United States, Canada, Saudi Arabia, Australia, and Japan pay their data scientists the most, on average, based on this data. On the other hand, Indonesia, Malaysia, Egypt, Turkey, Thailand, Pakistan, and Ecuador pay the least on average. It is important to note, however, that many countries, in particular many countries in Africa, South America, and the Eurasian Steppes have no data in this dataset on data scientist salaries. This is likely because most of these countries have very few data scientists, but could also be caused simply by a lack of access to salary data in these countries.
-
-```{r, echo = FALSE}
-job_title_counts <- data_science %>%
-  count(job_title)
-
-other_jobs <- job_title_counts %>%
-  filter(n < 100) %>%
-  pull(job_title)
-
-data_science_grouped <- data_science %>%
-  mutate(job_title_grouped = if_else(job_title %in% other_jobs, "Other", job_title))
-
-# Calculate the average salary for each job title and year
-avg_salary_by_job_year <- data_science_grouped %>%
-  group_by(job_title_grouped, work_year) %>%
-  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
-
-# Plotting the average salary for each job title by year
-ggplot(data = avg_salary_by_job_year, aes(x = job_title_grouped, y = avg_salary, fill = factor(work_year))) +
-  geom_bar(stat = "identity", position = position_dodge(), color = "black") +
-  theme_minimal() +
-  labs(title = "Average Salary by Job Title (Factored by Year)",
-       x = "Job Title",
-       y = "Average Salary",
-       fill = "Year") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-#### Analysis (2-3 code blocks, 2 figures, text/code comments as needed):
-
-In this section, provide the code that generates your plots. Use scale functions to provide nice axis labels and guides. You are welcome to use theme functions to customize the appearance of your plot, but you are not required to do so. All plots must be made with ggplot2. Do not use base R or lattice plotting functions.
-
 ```{r}
 library(cowplot)
 
@@ -130,7 +210,7 @@ company_salary <- data_science %>%
   summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
 
 # Plot 1: Average Salary by Experience Level
-plot1 <- ggplot(data = exp_salary, aes(x = experience_level, y = avg_salary)) +
+plot3 <- ggplot(data = exp_salary, aes(x = experience_level, y = avg_salary)) +
   geom_bar(stat = "identity", fill = "lightgreen") +
   theme_minimal() +
   labs(title = "Average Salary by Experience Level",
@@ -140,7 +220,7 @@ plot1 <- ggplot(data = exp_salary, aes(x = experience_level, y = avg_salary)) +
 
 
 # Plot 2: Average Salary by Employment Type
-plot2 <- ggplot(data = employment_salary, aes(x = employment_type, y = avg_salary)) +
+plot4 <- ggplot(data = employment_salary, aes(x = employment_type, y = avg_salary)) +
   geom_bar(stat = "identity", fill = "lightcoral") +
   theme_minimal() +
   labs(title = "Average Salary by Employment Type",
@@ -148,63 +228,13 @@ plot2 <- ggplot(data = employment_salary, aes(x = employment_type, y = avg_salar
        y = "Avg Salary") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-# Plot 3: Average Salary by Work Setting
-plot3 <- ggplot(data = work_salary, aes(x = work_setting, y = avg_salary)) +
-  geom_bar(stat = "identity", fill = "lightpink") +
-  theme_minimal() +
-  labs(title = "Average Salary by Work Setting",
-       x = "Work Setting",
-       y = "Avg Salary") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-# Plot 4: Average Salary by Company Size
-plot4 <- ggplot(data = company_salary, aes(x = factor(company_size, levels = c("S", "M", "L")), y = avg_salary)) +
-  geom_bar(stat = "identity", fill = "lightblue") +
-  theme_minimal() +
-  labs(title = "Average Salary by Company Size",
-       x = "Company Size",
-       y = "Avg Salary") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_x_discrete(labels = c("S" = "Small", "M" = "Medium", "L" = "Large"))
-
 # Arrange the plots in a grid
-combined_plot <- plot_grid(plot1, plot2, plot3, plot4, ncol = 2)
+combined_plot2 <- plot_grid(plot3, plot4, ncol = 1)
 
 # Print the combined plot
-combined_plot
+combined_plot2
 ```
 
-```{r}
-job_category_counts <- data_science %>%
-  count(job_category)
-other_jobs_C <- job_category_counts %>%
-  filter(n < 100) %>%
-  pull(job_category)
-data_science_grouped_C <- data_science %>%
-  mutate(job_category_grouped_C = if_else(job_category %in% other_jobs_C, "Other", job_category))
-avg_salary_by_job_C <- data_science_grouped_C %>%
-  group_by(job_category_grouped_C) %>%
-  summarize(avg_salary = mean(salary, na.rm = TRUE))
-ggplot(data = avg_salary_by_job_C, aes(x = job_category_grouped_C, y = avg_salary, fill = factor(work_year))) +
-  geom_bar(stat = "identity", fill = "skyblue") +
-  theme_minimal() +
-  labs(title = "Average Salary by Job Category",
-       x = "Job Category",
-       y = "Average Salary") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-#### Discussion (1-3 paragraphs):
-
-In the Discussion section, interpret the results of your analysis. Identify any trends revealed (or not revealed) by the plots. Speculate about why the data looks the way it does.
-
-### Question 2: What is the distribution of different data science jobs by company location, age of the individual, experience level, and work setting?
-
-#### Introduction
-
-In this section we aim to asnwer the question 'What is the distribution of different data science jobs by company location, age of the individual, experience level, and work setting?' This is particularly interesting since, assuming that the dataset is a representative sample of data scientists throughout the world (perhaps a significant assumption), we can extrapolate information about the makeup of data scientists throughout the world.
-
-#### Analysis
 
 ```{r}
 job_title_counts <- data_science %>%
