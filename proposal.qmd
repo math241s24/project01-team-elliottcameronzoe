@@ -10,7 +10,7 @@ editor: visual
 
 -   Our dataset, titled "Jobs and Salaries in Data Science," originates from \[AI Jobs\](<https://ai-jobs.net/salaries/2023/>). It encompasses various attributes crucial for understanding the landscape of data science careers
 
-```{r}
+```{r, echo=FALSE}
 library(tidyverse)
 data_science <- read_csv(file = "data/jobs_in_data.csv", show_col_types = FALSE)
 dim(data_science)
@@ -24,7 +24,7 @@ dim(data_science)
 
 ### Questions
 
-**Q1. Relationship between Predictor Variables and Salary**
+**Q1. The Effect of Company-Level Demands and Characteristics on Salary**
 
 -   Variables Involved: \`job_title\`, \`experience_level\`, \`employment_type\`, \`work_setting\`, \`company_size\`
 
@@ -34,7 +34,7 @@ dim(data_science)
 
 -   Variables Involved:\`job_title\`, \`employee_residence\`, \`age\`, \`experience_level\`, \`work_setting\`
 
--   Plan: See the differeince in the distribution of specific job titles across different variables like location, age, experience level, and work setting.
+-   Plan: See the difference in the distribution of specific job titles across different variables like location, age, experience level, and work setting.
 
 **Q3. Evolution of Data Science Jobs and Salaries Over Time**
 
