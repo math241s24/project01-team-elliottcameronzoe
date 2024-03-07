@@ -173,7 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction:</a>
   <ul class="collapse">
   <li><a href="#the-effect-of-company-level-demands-and-characteristics-on-salary" id="toc-the-effect-of-company-level-demands-and-characteristics-on-salary" class="nav-link" data-scroll-target="#the-effect-of-company-level-demands-and-characteristics-on-salary">The Effect of Company-Level Demands and Characteristics on Salary</a></li>
-  <li><a href="#question-2-what-is-the-distribution-of-different-data-science-jobs-by-company-location-age-of-the-individual-experience-level-and-work-setting" id="toc-question-2-what-is-the-distribution-of-different-data-science-jobs-by-company-location-age-of-the-individual-experience-level-and-work-setting" class="nav-link" data-scroll-target="#question-2-what-is-the-distribution-of-different-data-science-jobs-by-company-location-age-of-the-individual-experience-level-and-work-setting">Question 2: What is the distribution of different data science jobs by company location, age of the individual, experience level, and work setting?</a></li>
+  <li><a href="#question-2-the-effect-of-personal-characteristics-on-salary" id="toc-question-2-the-effect-of-personal-characteristics-on-salary" class="nav-link" data-scroll-target="#question-2-the-effect-of-personal-characteristics-on-salary">Question 2: The Effect of Personal Characteristics on Salary</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -202,7 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>A Look Into Salaries in Data Science</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction:</h2>
-<p>As different career paths fall in and out of demand, it is hard to know what is a worth while pursuit in today’s job market. We are all interested in careers in data science and we want be knowledgeable about the field as we prepare for graduation. We were especially curious about two things: - What aspects of a company affect average salary? - How does salary change based on personal characteristics? To answer these questions we first selected a data set titled “Jobs and Salaries in Data Science,” which originated from <a href="https://ai-jobs.net/salaries/2023/">AI Jobs</a>. Each observation represents one person in one year. Our dataset contains 9355 observations with 12 variables. The variables include information on salary, and explanatory variables such as company size, experience level, work setting, employment type, and year. There is also an extensive list of data science job titles.</p>
+<p>As different career paths fall in and out of demand, it is hard to know what is a worth while pursuit in today’s job market. We are all interested in careers in data science and we want be knowledgeable about the field as we prepare for graduation. We were especially curious about two things: - How do company-related factors influence the salary of workers in the field of data science?? - How do personal factors (like location, experience level, and employment type) influence the salary of workers in the field of data science? To answer these questions we first selected a data set titled “Jobs and Salaries in Data Science,” which originated from <a href="https://ai-jobs.net/salaries/2023/">AI Jobs</a>. Each observation represents one person in one year. Our dataset contains 9355 observations with 12 variables. The variables include information on salary, and explanatory variables such as company size, experience level, work setting, employment type, and year. There is also an extensive list of data science job titles.</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
@@ -270,27 +270,11 @@ The following objects are masked from 'package:base':
 </section>
 <section id="approach-1-2-paragraphs" class="level4">
 <h4 class="anchored" data-anchor-id="approach-1-2-paragraphs">Approach (1-2 paragraphs):</h4>
-<p>In order to address this question, we must break it up into three different parts. First, we analyze the effect of company location on average salary. This relationship between company location and salary is particularly interesting as data science is a relatively new field and requires a lot of technological infrastructure to perform. In addition, in many developing countries, there is likely not as high of a demand for data scientist. As such, we are interested in the differential pay between countries for similar jobs. Next, in order to disaggregate the data in service of more specific analysis, its important to look not just at differential pay between countries in the field of data science, but also differential pay between particular positions within data science.</p>
-<p>Below is a map displaying average data science salaries by company location</p>
-<p>As displayed in the graph, it appears that data scientists in highly developed nations tend to be compensate more than those in developing countries. Namely, companies in the United States, Canada, Saudi Arabia, Australia, and Japan pay their data scientists the most, on average, based on this data. On the other hand, Indonesia, Malaysia, Egypt, Turkey, Thailand, Pakistan, and Ecuador pay the least on average. It is important to note, however, that many countries, in particular many countries in Africa, South America, and the Eurasian Steppes have no data in this dataset on data scientist salaries. This is likely because most of these countries have very few data scientists, but could also be caused simply by a lack of access to salary data in these countries.</p>
+<p>In order to provide clear insights about salary by company-level characteristics with minimal complexities and the primary intention of communicating the <em>makeup</em> of the data science field, we concluded that bar plots would make the most effective visualizations. The utility of bar plots is particularly handy for the scope of this project since many of the variables we are investigating in relation to salary are discrete, categorical variables. In particular, our first visualization, combines two bar plots: one relating to average salary by job title and the other relating to average salary by job category. As discussed briefly above, these plots convey similar information but with different levels of specificity, making the combined plot a reasonable glimpse at the sub-fields of data science. our second visualization relates more to company characteristics than it does to fields/positions that are in demand by companies. Instead, this combined plot displays the relationship between work setting and company size, providing more environment-specific insights.</p>
 </section>
 <section id="analysis-2-3-code-blocks-2-figures-textcode-comments-as-needed" class="level4">
 <h4 class="anchored" data-anchor-id="analysis-2-3-code-blocks-2-figures-textcode-comments-as-needed">Analysis (2-3 code blocks, 2 figures, text/code comments as needed):</h4>
-<p>In this section, provide the code that generates your plots. Use scale functions to provide nice axis labels and guides. You are welcome to use theme functions to customize the appearance of your plot, but you are not required to do so. All plots must be made with ggplot2. Do not use base R or lattice plotting functions.</p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'job_title_grouped'. You can override using
-the `.groups` argument.</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'cowplot'</code></pre>
@@ -300,47 +284,48 @@ Attaching package: 'cowplot'</code></pre>
 
     theme_map</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>exp_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(experience_level) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary_in_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>employment_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(employment_type) <span class="sc">%&gt;%</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary_in_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>work_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(work_setting) <span class="sc">%&gt;%</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary_in_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>company_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary_in_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 3: Average Salary by Work Setting</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> work_salary, <span class="fu">aes</span>(<span class="at">x =</span> work_setting, <span class="at">y =</span> avg_salary)) <span class="sc">+</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightpink"</span>) <span class="sc">+</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Work Setting"</span>,</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Work Setting"</span>,</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Avg Salary"</span>) <span class="sc">+</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 4: Average Salary by Company Size</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> company_salary, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(company_size, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"S"</span>, <span class="st">"M"</span>, <span class="st">"L"</span>)), <span class="at">y =</span> avg_salary)) <span class="sc">+</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Company Size"</span>,</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Company Size"</span>,</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Avg Salary"</span>) <span class="sc">+</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"S"</span> <span class="ot">=</span> <span class="st">"Small"</span>, <span class="st">"M"</span> <span class="ot">=</span> <span class="st">"Medium"</span>, <span class="st">"L"</span> <span class="ot">=</span> <span class="st">"Large"</span>))</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange the plots in a grid</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>combined_plot <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(plot1, plot2, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the combined plot</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>combined_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># summary statistics of average salary by work setting</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>work_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(work_setting) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary_in_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># summary statistics of average salary by company size</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>company_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary_in_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 3: Average Salary by Work Setting</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> work_salary, <span class="fu">aes</span>(<span class="at">x =</span> work_setting, <span class="at">y =</span> avg_salary)) <span class="sc">+</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightpink"</span>) <span class="sc">+</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Work Setting"</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Work Setting"</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Salary (USD)"</span>) <span class="sc">+</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 4: Average Salary by Company Size</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> company_salary, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(company_size, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"S"</span>, <span class="st">"M"</span>, <span class="st">"L"</span>)), <span class="at">y =</span> avg_salary)) <span class="sc">+</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Company Size"</span>,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Company Size"</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Salary (USD)"</span>) <span class="sc">+</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"S"</span> <span class="ot">=</span> <span class="st">"Small"</span>, <span class="st">"M"</span> <span class="ot">=</span> <span class="st">"Medium"</span>, <span class="st">"L"</span> <span class="ot">=</span> <span class="st">"Large"</span>))</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange the plots in a grid</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>combined_plot <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(plot1, plot2, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the combined plot</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>combined_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -351,72 +336,94 @@ Attaching package: 'cowplot'</code></pre>
 <p>In the Discussion section, interpret the results of your analysis. Identify any trends revealed (or not revealed) by the plots. Speculate about why the data looks the way it does.</p>
 </section>
 </section>
-<section id="question-2-what-is-the-distribution-of-different-data-science-jobs-by-company-location-age-of-the-individual-experience-level-and-work-setting" class="level3">
-<h3 class="anchored" data-anchor-id="question-2-what-is-the-distribution-of-different-data-science-jobs-by-company-location-age-of-the-individual-experience-level-and-work-setting">Question 2: What is the distribution of different data science jobs by company location, age of the individual, experience level, and work setting?</h3>
+<section id="question-2-the-effect-of-personal-characteristics-on-salary" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-the-effect-of-personal-characteristics-on-salary">Question 2: The Effect of Personal Characteristics on Salary</h3>
 <section id="introduction-2" class="level4">
 <h4 class="anchored" data-anchor-id="introduction-2">Introduction</h4>
-<p>In this section we aim to asnwer the question ‘What is the distribution of different data science jobs by company location, age of the individual, experience level, and work setting?’ This is particularly interesting since, assuming that the dataset is a representative sample of data scientists throughout the world (perhaps a significant assumption), we can extrapolate information about the makeup of data scientists throughout the world.</p>
+<p>In this section we aim to answer the question ‘how do personal factors (like company location, experience level, and employment type) influence the salary of workers in the field of data science?’ We believe that these variables provide a breadth of information about the landscape of data science salaries based on person factors. Let’s look at each of these variables individually. First, while one cannot immediately change their level of experience in a given field, it is useful to understand expected pay at different portions of one’s career. On the other hand, often people do have some say in their employment type and may decide to pursue certain employment types based on their average salaries. Next, the relationship between company location and salary is particularly interesting as data science is a relatively new field and requires a lot of technological infrastructure to perform. In addition, in many developing countries, there is likely not as high of a demand for data scientist. As such, we are interested in the differential pay between countries for similar jobs.</p>
+</section>
+<section id="approach" class="level4">
+<h4 class="anchored" data-anchor-id="approach">Approach</h4>
+<p>Similar to our approach for investigating company-level characteristics, since our variables are categorical, it is reasonable to provide bar plots to display relationships between these categorical variables are salary. In addition, since we are also interested in location, a map provides an intuitive understand of differences in pay between different countries. First, we decided to combine two bar plots: one displaying average salary by experience level and the other displaying average salary by employment type. Next, we analyze the effect of company location on average salary. Note that while we are analyzing company location and not country of origin, we believe that workers’ access to jobs <em>usually</em> depends on where they live, so that looking into company location still produces personal insights.</p>
 </section>
 <section id="analysis" class="level4">
 <h4 class="anchored" data-anchor-id="analysis">Analysis</h4>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Breaking News: tmap 3.x is retiring. Please test v4, e.g. with
-remotes::install_github('r-tmap/tmap')</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># summary statistics of average salary by experience level</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>exp_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(experience_level) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary_in_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># summary statistics of average salary by employment type</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>employment_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(employment_type) <span class="sc">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary_in_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 1: Average Salary by Experience Level</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> exp_salary, <span class="fu">aes</span>(<span class="at">x =</span> experience_level, <span class="at">y =</span> avg_salary)) <span class="sc">+</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightgreen"</span>) <span class="sc">+</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Experience Level"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Experience Level"</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Avg Salary"</span>) <span class="sc">+</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 2: Average Salary by Employment Type</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> employment_salary, <span class="fu">aes</span>(<span class="at">x =</span> employment_type, <span class="at">y =</span> avg_salary)) <span class="sc">+</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightcoral"</span>) <span class="sc">+</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Employment Type"</span>,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Employment Type"</span>,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Avg Salary"</span>) <span class="sc">+</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange the plots in a grid</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>combined_plot2 <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(plot3, plot4, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the combined plot</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>combined_plot2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>exp_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(experience_level) <span class="sc">%&gt;%</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary_in_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>employment_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(employment_type) <span class="sc">%&gt;%</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary_in_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>work_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(work_setting) <span class="sc">%&gt;%</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary_in_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Breaking News: tmap 3.x is retiring. Please test v4, e.g. with
+remotes::install_github('r-tmap/tmap')</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>avg_salary_by_country <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(company_location) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary_in_usd =</span> <span class="fu">mean</span>(salary_in_usd))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>avg_salary_by_country <span class="ot">&lt;-</span> avg_salary_by_country <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">company_location =</span> <span class="fu">case_when</span>(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    company_location <span class="sc">==</span> <span class="st">"Czech Republic"</span> <span class="sc">~</span> <span class="st">"Czech Rep."</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    company_location <span class="sc">==</span> <span class="st">"South Korea"</span> <span class="sc">~</span> <span class="st">"Korea"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    company_location <span class="sc">==</span> <span class="st">"Central African Republic"</span> <span class="sc">~</span> <span class="st">"Central African Rep."</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    company_location <span class="sc">==</span> <span class="st">"Bosnia and Herzegovina"</span> <span class="sc">~</span> <span class="st">"Bosnia and Herz."</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> company_location</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>company_salary <span class="ot">&lt;-</span> data_science <span class="sc">%&gt;%</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_salary =</span> <span class="fu">mean</span>(salary_in_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 1: Average Salary by Experience Level</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> exp_salary, <span class="fu">aes</span>(<span class="at">x =</span> experience_level, <span class="at">y =</span> avg_salary)) <span class="sc">+</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightgreen"</span>) <span class="sc">+</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Experience Level"</span>,</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Experience Level"</span>,</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Avg Salary"</span>) <span class="sc">+</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 2: Average Salary by Employment Type</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> employment_salary, <span class="fu">aes</span>(<span class="at">x =</span> employment_type, <span class="at">y =</span> avg_salary)) <span class="sc">+</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightcoral"</span>) <span class="sc">+</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by Employment Type"</span>,</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Employment Type"</span>,</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Avg Salary"</span>) <span class="sc">+</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange the plots in a grid</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>combined_plot2 <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(plot3, plot4, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the combined plot</span></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>combined_plot2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"World"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>world_map <span class="ot">&lt;-</span> <span class="fu">merge</span>(World, avg_salary_by_country, <span class="at">by.x =</span> <span class="st">"name"</span>, <span class="at">by.y =</span> <span class="st">"company_location"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(world_map) <span class="sc">+</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">"avg_salary_in_usd"</span>, <span class="at">style =</span> <span class="st">"jenks"</span>, <span class="at">palette =</span> <span class="st">"Blues"</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">main.title =</span> <span class="st">"Average Salaries of Data Scientists by Country, 2020-2023"</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">"Average Salaries by Country (USD), 2020-2023"</span>, <span class="at">legend.title =</span> <span class="st">"Salary Range"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>We encourage you to be concise. A paragraph should typically not be longer than 5 sentences.</p>
-<p>You are not required to perform any statistical tests in this project, but you may do so if you find it helpful to answer your question.</p>
+</section>
+<section id="discussion" class="level4">
+<h4 class="anchored" data-anchor-id="discussion">Discussion</h4>
+<p>As displayed in the map, it appears that data scientists in highly developed nations tend to be compensate more than those in developing countries. Namely, companies in the United States, Canada, Saudi Arabia, Australia, and Japan pay their data scientists the most, on average, based on this data. On the other hand, Indonesia, Malaysia, Egypt, Turkey, Thailand, Pakistan, and Ecuador pay the least on average. It is important to note, however, that many countries, in particular many countries in Africa, South America, and the Eurasian Steppes have no data in this dataset on data scientist salaries. This is likely because most of these countries have very few data scientists, but could also be caused simply by a lack of access to salary data in these countries. In addition, this visualization doesn’t take into account cost of living in these different countries.</p>
 
 
 </section>

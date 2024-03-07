@@ -47,13 +47,14 @@ data_science$company_size <- as.factor(data_science$company_size)
 #### Approach (1-2 paragraphs):
 
   In order to provide clear insights about salary by company-level characteristics with minimal complexities and the primary intention of communicating the *makeup* of the data science field, we concluded that bar plots would make the most effective visualizations. The utility of bar plots is particularly handy for the scope of this project since many of the variables we are investigating in relation to salary are discrete, categorical variables.
-  In particular, our first visualization, combines two bar plots: one relating to average salary by job title and the other relating to average salary by job category. As discussed briefly above, these plots convey similar information but with different levels of specificity, making the combined plot a reasonable glimpse at the sub-fields of data science. our second visualization relates more to company characteristics than it does to fields/positions that are in demand by companies. Instead, this combined plot displays the relationship between work setting and company size, providing more environment-specific insights.
+  In particular, our first visualization, combines two bar plots: one relating to average salary by job title and the other relating to average salary by job category. As discussed briefly above, these plots convey similar information but with different levels of specificity, making the combined plot a reasonable glimpse at the sub-fields of data science. Our second visualization relates more to company characteristics than it does to fields/positions that are in demand by companies. Instead, this combined plot displays the relationship between work setting and company size, providing more environment-specific insights.
 
 
 #### Analysis (2-3 code blocks, 2 figures, text/code comments as needed):
 
 
 ```{r, echo = FALSE}
+library(cowplot)
 # store the number of each kind of job title
 job_title_counts <- data_science %>%
   count(job_title)
@@ -150,7 +151,7 @@ combined_plot
 
 In the Discussion section, interpret the results of your analysis. Identify any trends revealed (or not revealed) by the plots. Speculate about why the data looks the way it does.
 
-### Question 2: The Effect of Personal Characteristics on Salary
+### The Effect of Personal Characteristics on Salary
 
 #### Introduction
 
@@ -233,3 +234,4 @@ tm_shape(world_map) +
 #### Discussion
 
   As displayed in the map, it appears that data scientists in highly developed nations tend to be compensate more than those in developing countries. Namely, companies in the United States, Canada, Saudi Arabia, Australia, and Japan pay their data scientists the most, on average, based on this data. On the other hand, Indonesia, Malaysia, Egypt, Turkey, Thailand, Pakistan, and Ecuador pay the least on average. It is important to note, however, that many countries, in particular many countries in Africa, South America, and the Eurasian Steppes have no data in this dataset on data scientist salaries. This is likely because most of these countries have very few data scientists, but could also be caused simply by a lack of access to salary data in these countries. In addition, this visualization doesn't take into account cost of living in these different countries.
+  

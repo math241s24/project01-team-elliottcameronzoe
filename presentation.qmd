@@ -42,7 +42,7 @@ Q1: How do company-related factors (like job title, job category,work setting, a
 
 Q2: How do personal factors (like location, experience level, and employment type) influence the salary of workers in the field of data science?
 
-## Question 1
+## The Effect of Company-Level Demands and Characteristics on Salary
 
 ```{r echo = F}
 # Data wrangling
@@ -102,7 +102,7 @@ combined_plot3 <- plot_grid(plot6,plot7,ncol = 2)
 combined_plot3
 ```
 
-## Question 1
+## The Effect of Company-Level Demands and Characteristics on Salary
 ```{r, echo=FALSE}
 exp_salary <- data_science %>%
   group_by(experience_level) %>%
@@ -147,7 +147,7 @@ combined_plot <- plot_grid(plot1, plot2, ncol = 2)
 combined_plot
 ```
 
-## Question 2
+## The Effect of Personal Characteristics on Salary
 
 ```{r, echo=FALSE}
 avg_salary_by_country <- data_science %>%
@@ -174,7 +174,7 @@ tm_shape(world_map) +
 ```
 
 
-## Question 2
+## The Effect of Personal Characteristics on Salary
 ```{r, echo=FALSE}
 exp_salary <- data_science %>%
   group_by(experience_level) %>%
@@ -218,10 +218,3 @@ combined_plot2 <- plot_grid(plot3, plot4, ncol = 1)
 combined_plot2
 ```
 
-
-## Rubric
-
--   Roughly I recommend 1 slide for introduction, 2 slides for Question 1, ans 2 slides for Question 2.
-    -   You can imagine spending roughly one minute on each slide.
-    -   You should feel free to have more (or fewer) slides.
--   Your evaluation will be based on your content, professionalism (including sticking to time), and your performance during the Q&A (question and answer). We don't care how many slides you use to do this.
