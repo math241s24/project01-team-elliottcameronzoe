@@ -68,19 +68,15 @@ other_jobs <- job_title_counts %>%
 data_science_grouped <- data_science %>%
   mutate(job_title_grouped = if_else(job_title %in% other_jobs, "Other", job_title))
 
-# Calculate the average salary for each job title
-avg_salary_by_job <- data_science_grouped %>%
-  group_by(job_title_grouped) %>%
-  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
-
 # Plotting the average salary for each job title by year
-plot6 <- ggplot(data = avg_salary_by_job, aes(x = job_title_grouped, y = avg_salary)) +
-  geom_bar(stat = "identity", fill = "lightpink") +
+plot6 <- ggplot(data = data_science_grouped, aes(x = job_title_grouped, y = salary_in_usd, fill = job_title_grouped)) +
+  geom_boxplot() +
   theme_minimal() +
-  labs(title = "Average Salary by Job Title",
+  labs(title = "Data Science Salaries by Job Title",
        x = "Job Title",
-       y = "Average Salary (USD)") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+       y = "Salary (USD)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none")+
+  scale_y_continuous(labels = scales::label_comma())
 
 job_category_counts <- data_science %>%
   count(job_category)
@@ -90,20 +86,17 @@ other_jobs_C <- job_category_counts %>%
 
 data_science_grouped_C <- data_science %>%
   mutate(job_category_grouped_C = if_else(job_category %in% other_jobs_C, "Other", job_category))
-avg_salary_by_job_C <- data_science_grouped_C %>%
-  group_by(job_category_grouped_C) %>%
-  summarize(avg_salary = mean(salary, na.rm = TRUE))
 
-plot7<- ggplot(data = avg_salary_by_job_C, aes(x = job_category_grouped_C, y = avg_salary)) +
-  geom_bar(stat = "identity", fill = "skyblue") +
+plot7<- ggplot(data = data_science_grouped_C, aes(x = job_category_grouped_C, y = salary_in_usd, fill = job_category_grouped_C)) +
+  geom_boxplot() +
   theme_minimal() +
-  labs(title = "Average Salary by Job Category",
+  labs(title = "Data Science Salaries by Job Category",
        x = "Job Category",
-       y = "Average Salary (USD)") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+       y = "Salary (USD)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none") +
+  scale_y_continuous(labels = scales::label_comma())
 
-combined_plot3 <- plot_grid(plot6,plot7,ncol = 2)
-combined_plot3
+plot_grid(plot6,plot7)
 ```
 
 ```{r}
@@ -121,23 +114,25 @@ company_salary <- data_science %>%
 
 
 # Plot 3: Average Salary by Work Setting
-plot1 <- ggplot(data = work_salary, aes(x = work_setting, y = avg_salary)) +
-  geom_bar(stat = "identity", fill = "lightpink") +
+plot1 <- ggplot(data = data_science, aes(x = work_setting, y = salary_in_usd, fill = work_setting)) +
+  geom_violin() +
   theme_minimal() +
-  labs(title = "Average Salary by Work Setting",
+  labs(title = "Data Science Salaries by Work Setting",
        x = "Work Setting",
-       y = "Average Salary (USD)") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+       y = "Salary (USD)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  legend.position = "none")+
+  scale_y_continuous(labels = scales::label_comma())
 
 # Plot 4: Average Salary by Company Size
-plot2 <- ggplot(data = company_salary, aes(x = factor(company_size, levels = c("S", "M", "L")), y = avg_salary)) +
-  geom_bar(stat = "identity", fill = "lightblue") +
+plot2 <- ggplot(data = data_science, aes(x = factor(company_size, levels = c("S", "M", "L")), y = salary_in_usd, fill = factor(company_size, levels = c("S", "M", "L")))) +
+  geom_violin() +
   theme_minimal() +
-  labs(title = "Average Salary by Company Size",
+  labs(title = "Data Science Salaries by Company Size",
        x = "Company Size",
-       y = "Average Salary (USD)") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_x_discrete(labels = c("S" = "Small", "M" = "Medium", "L" = "Large"))
+       y = "Salary (USD)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  legend.position = "none") +
+  scale_x_discrete(labels = c("S" = "Small", "M" = "Medium", "L" = "Large"))+
+  scale_y_continuous(labels = scales::label_comma())
 
 # Arrange the plots in a grid
 combined_plot <- plot_grid(plot1, plot2, ncol = 2)
@@ -170,34 +165,24 @@ Investigating which aspects of a company impact salary led us to some compelling
 ```{r}
 library(cowplot)
 
-# summary statistics of average salary by experience level
-exp_salary <- data_science %>%
-  group_by(experience_level) %>%
-  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
-
-# summary statistics of average salary by employment type
-employment_salary <- data_science %>%
-  group_by(employment_type) %>%
-  summarize(avg_salary = mean(salary_in_usd, na.rm = TRUE))
-
 # Plot 1: Average Salary by Experience Level
-plot3 <- ggplot(data = exp_salary, aes(x = experience_level, y = avg_salary)) +
-  geom_bar(stat = "identity", fill = "lightgreen") +
+plot3 <- ggplot(data = data_science, aes(x = experience_level, y = salary_in_usd, fill = experience_level)) +
+  geom_boxplot() +
   theme_minimal() +
-  labs(title = "Average Salary by Experience Level",
+  labs(title = "Data Science Salaries by Experience Level",
        x = "Experience Level",
        y = "Avg Salary") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  legend.position = "none")
 
 
 # Plot 2: Average Salary by Employment Type
-plot4 <- ggplot(data = employment_salary, aes(x = employment_type, y = avg_salary)) +
-  geom_bar(stat = "identity", fill = "lightcoral") +
+plot4 <- ggplot(data = data_science, aes(x = employment_type, y = salary_in_usd, fill = employment_type)) +
+  geom_boxplot() +
   theme_minimal() +
-  labs(title = "Average Salary by Employment Type",
+  labs(title = "Data Science Salaries by Employment Type",
        x = "Employment Type",
-       y = "Avg Salary") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+       y = "Salary (USD)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none")
 
 # Arrange the plots in a grid
 combined_plot2 <- plot_grid(plot3, plot4, ncol = 2)
@@ -208,6 +193,7 @@ combined_plot2
 
 ```{r}
 library(tmap)
+income <- read_csv(file = "data/median-income-by-country-2024.csv")
 
 avg_salary_by_country <- data_science %>%
   group_by(company_location) %>%
@@ -224,15 +210,22 @@ avg_salary_by_country <- avg_salary_by_country %>%
 
 
 data("World")
-world_map <- merge(World, avg_salary_by_country, by.x = "name", by.y = "company_location", all.x = TRUE)
+world_map <- merge(avg_salary_by_country, income, by.x = "company_location", by.y = "country", all.x = TRUE) %>% mutate(normalized = avg_salary_in_usd/medianIncomeByCountry_meanIncome)
+
+world_map <- merge(World, world_map, by.x = "name", by.y = "company_location", all.x = TRUE)
 
 tm_shape(world_map) +
   tm_polygons(col = "avg_salary_in_usd", style = "jenks", palette = "Blues",
               main.title = "Average Salaries of Data Scientists by Country, 2020-2023",
               title = "Average Salaries by Country (USD), 2020-2023", legend.title = "Salary Range")
+
+tm_shape(world_map) +
+  tm_polygons(col = "normalized", style = "jenks", palette = "Blues",
+              main.title = "Average Salaries of Data Scientists by Country, 2020-2023",
+              title = "Normalized Avg Salaries by Country (USD), 2020-2023", legend.title = "Salary Range")
 ```
 
 #### Discussion
 
-  Our investigation was rendered more comprehensive with our subsequent analysis of personal factors which impact salary. Perhaps unsurprisingly, we found that average salary has a steadily increasing relationship with experience level. Entry level employees make under 100k on average, while executives made over 200k. The type of employment data scientists are contracted is also an important determining factor. Full-time workers had an average salary of 150k while freelance workers had an average salary of 50k. Additionally, the spacial analysis of salary by country also revealed that location matters. The United States, Canada, Saudi Arabia, Japan, and Australia had the highest annual salaries on average. Other countries such as Pakistan, Egypt, Indonesia, Turkey, and Ecuador had the lowest average salaries.
+  Our investigation was rendered more comprehensive with our subsequent analysis of personal factors which impact salary. Perhaps unsurprisingly, we found that average salary has a steadily increasing relationship with experience level. Entry level employees make under 100k on average, while executives made over 200k. The type of employment data scientists are contracted is also an important determining factor. Full-time workers had an average salary of 150k while freelance workers had an average salary of 50k. Additionally, the spacial analysis of salary by country also revealed that location matters. The United States, Canada, Saudi Arabia, Japan, and Australia had the highest annual salaries on average. Other countries such as Pakistan, Egypt, Indonesia, Turkey, and Ecuador had the lowest average salaries. However, after normalizing by each countries mean income, we can see that data scientists in Kenya and Nigeria make the most compared to the average person in each country respectively.
   
